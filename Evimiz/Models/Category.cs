@@ -12,5 +12,7 @@ namespace Evimiz.Models
 
         [Required, StringLength(100)]
         public string Name { get; set; }
+
+
     }
 }

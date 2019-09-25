@@ -11,7 +11,7 @@ namespace Evimiz.Models
     {
         public İstifadəçi()
         {
-            Advertisement = new HashSet<Advertisement>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         [Required(ErrorMessage ="Adınızı daxil edin"), StringLength(100,ErrorMessage = "Adınızın uzunluğu 100 herfden  artıq ola bilməz")]
@@ -48,6 +48,6 @@ namespace Evimiz.Models
         public int? RegionId { get; set; }
         public virtual Region Region { get; set; }
 
-        public virtual ICollection<Advertisement> Advertisement { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace Evimiz.Models
 
         [Required(ErrorMessage = "Mərətbə sayını daxil edin")]
         public int Floor { get; set; }
+
+
     }
 }

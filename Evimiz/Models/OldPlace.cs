@@ -8,6 +8,11 @@ namespace Evimiz.Models
 {
     public class OldPlace
     {
+        public OldPlace()
+        {
+            Homes = new HashSet<Home>();
+        }
+
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Otaq sayını daxil edin")]
@@ -18,5 +23,10 @@ namespace Evimiz.Models
 
         [Required(ErrorMessage = "Mərətbə sayını daxil edin")]
         public int Floor { get; set; }
+
+
+        public virtual ICollection<Home> Homes { get; set; }
+
+
     }
 }

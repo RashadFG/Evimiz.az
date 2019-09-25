@@ -203,9 +203,9 @@ namespace Evimiz.Controllers
                 if (userrole == "İstifadəçi")
                 {
                     //Add Admin from here
-                    await _usermanager.AddToRoleAsync(user, "Admin");
+                    //await _usermanager.AddToRoleAsync(user, "Admin");
 
-                    //await _usermanager.AddToRoleAsync(user, "Istifadəçi");
+                    await _usermanager.AddToRoleAsync(user, "Istifadəçi");
                 }
                 else if (userrole == "Əmlakçı")
                 {

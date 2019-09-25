@@ -90,7 +90,7 @@ namespace Evimiz
             app.UseAuthentication();
             app.UseSession();
 
-            app.UseStatusCodePagesWithReExecute("/error/{0}");
+            app.UseStatusCodePagesWithReExecute("/Evimiz/Error","?statusCode={0}");
 
             app.UseMvc(routes =>
             {

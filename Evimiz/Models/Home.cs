@@ -7,6 +7,10 @@ namespace Evimiz.Models
 {
     public class Home
     {
+        public Home()
+        {
+            Advertisements = new HashSet<Advertisement>();
+        }
         public int Id { get; set; }
 
         public int? NewPlaceId { get; set; }
@@ -29,5 +33,7 @@ namespace Evimiz.Models
 
         public int? PropertyObjectId { get; set; }
         public virtual PropertyObject PropertyObject { get; set; }
+
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }
