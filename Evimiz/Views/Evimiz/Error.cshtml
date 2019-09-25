@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="~/images/property-icon-0.jpg" />
+    <title>Evimiz.az</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/font/stylesheet.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/util.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="preloader d-flex justify-content-center align-items-center">
+        <img src="~/Images/building_loader.gif" alt="" class="img-fluid">
+    </div>
+    <div class="error">
+        <div class="container-floud">
+            <div class="col-xs-12 ground-color text-center">
+                <div class="container-error-404" style="padding-top: 10%;">
+                    <div class="clip">
+                        <div class="shadow"><span class="digit thirdDigit"></span></div>
+                    </div>
+                    <div class="clip">
+                        <div class="shadow"><span class="digit secondDigit"></span></div>
+                    </div>
+                    <div class="clip">
+                        <div class="shadow"><span class="digit firstDigit"></span></div>
+                    </div>
+                    <div class="msg">OH!<span class="triangle"></span></div>
+                </div>
+                <h2 class="h1" style="margin-top:10%">Bağışlayın! Bu axtarış tapılmadı...</h2>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/c598aedde7.js"></script>
+    <script src="~/jquery/jquery-3.4.1.min.js"></script>
+    <script src="~/src/main.js"></script>
+    <script>
+        /* 404 start */
+        function randomNum() {
+            "use strict";
+            return Math.floor(Math.random() * 9) + 1;
+        }
+        var loop1, loop2, loop3, time = 30,
+            i = 0,
+            number, selector3 = document.querySelector('.thirdDigit'),
+            selector2 = document.querySelector('.secondDigit'),
+            selector1 = document.querySelector('.firstDigit');
+        loop3 = setInterval(function () {
+            "use strict";
+            if (i > 40) {
+                clearInterval(loop3);
+                selector3.textContent = 4;
+            } else {
+                selector3.textContent = randomNum();
+                i++;
+            }
+        }, time);
+        loop2 = setInterval(function () {
+            "use strict";
+            if (i > 80) {
+                clearInterval(loop2);
+                selector2.textContent = 0;
+            } else {
+                selector2.textContent = randomNum();
+                i++;
+            }
+        }, time);
+        loop1 = setInterval(function () {
+            "use strict";
+            if (i > 100) {
+                clearInterval(loop1);
+                selector1.textContent = 4;
+            } else {
+                selector1.textContent = randomNum();
+                i++;
+            }
+        }, time);
+           /* 404 end */
+    </script>
+</body>
+</html>

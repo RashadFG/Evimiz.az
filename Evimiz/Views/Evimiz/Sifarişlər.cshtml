@@ -1,0 +1,407 @@
+﻿
+@{
+    ViewData["Title"] = "Sifarişlər";
+}
+
+<!-- Order-filter start -->
+<section id="Order-filter">
+    <div class="container ">
+        <div class="row py-2 justify-content-center" style="background: gray">
+            <div class="col-lg-3 col-6">
+                <div class="single-item font-size-tag">
+                    <a href="#" class="  categroy-btn d-block text-center ">
+                        Bütün elanlar (12)
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="single-item font-size-tag">
+                    <a href="#" class=" categroy-btn d-block    text-center">
+                        Əmlak axtariram (12)
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="single-item font-size-tag">
+                    <a href="#" class="  categroy-btn d-block  text-center">
+                        İcarəyə axtarıram (31)
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="items font-size-tag">
+                    <a href="#" class=" categroy-btn d-block  text-center plus-order ">
+                        <i class="fas fa-plus mr-2"></i>Əmlak sifariş et
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="Agents-div py-2">
+            <div class="row">
+                <div class="col-12">
+                    <h4>
+                        Əmlak sifariş et
+                    </h4>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6  col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group ">
+                                <label for="">Mülk</label>
+                                <select class="form-control order-type">
+                                    <option value="Alıram" data-id="1">Alıram</option>
+                                    <option value="İcarəyə alıram" data-id="2">İcarəyə alıram</option>
+                                </select>
+                                <span class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Error
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+
+                                <input type="text" class="form-control User-name" placeholder="Ad soyad ">
+                                <span class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Error
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+
+                                <input type="text" class="form-control Advertisement-name"
+                                       placeholder="Elanın adı ">
+                                <span class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Error
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6  col-12">
+                    <div class="form-group">
+                        <label for="">Elan haqqında </label>
+                        <textarea class="form-control Order-about" rows="8"></textarea>
+                        <span class="validation-error">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Error
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12 ">
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-control my-2 p-2 number-code-1">
+                                <option value="+99451">+99451</option>
+                                <option value="+99450">+99450</option>
+                                <option value="+99470">+99470</option>
+                                <option value="+99477">+99477</option>
+                                <option value="+99455">+99455</option>
+                                <option value="+99460">+99460</option>
+                                <option value="+99440">+99440</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control my-2 p-2 number-code-input-1"
+                                   placeholder="Nömrə">
+                            <span class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Eror
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 ">
+                    <div class="row  d-none plus-div">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <select class="form-control mt-2  number-code-2">
+                                    <option value="+99451">+99451</option>
+                                    <option value="+99450">+99450</option>
+                                    <option value="+99470">+99470</option>
+                                    <option value="+99477">+99477</option>
+                                    <option value="+99455">+99455</option>
+                                    <option value="+99460">+99460</option>
+                                    <option value="+99440">+99440</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group position-relative">
+                                <input type="text" class="form-control  number-code-input-2  mt-2"
+                                       placeholder="Növbəti nömrə">
+                                <span class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Error
+                                </span>
+                            </div>
+                            <span class="ft-s"><i class="fas fa-window-close close-input"></i></span>
+
+                        </div>
+                    </div>
+                    <div class="col-12 p-0">
+                        <div class="add-phoneNumber Yellow-bg  mt-2  ">
+                            <i class="fas fa-plus mr-3"></i>Əlavə nömrə
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <input type="submit" class="btn btn-success   btn-click btn-block order-send-btn"
+                           value="Sifariş Et">
+                </div>
+            </div>
+        </div>
+        <div class="all-orders ">
+            <div class="row">
+                <div class="col-12 my-2 p-0">
+                    <div class="one-order  ">
+                        <!-- head-max length 100, -->
+                        <!-- body-max length 200 -->
+                        <div class="row">
+                            <div class="head col-12">
+                                <h5 class="p-1 m-0">
+                                    Kirayə həyət evi
+                                    nizami rayonundaKirayə həyət evi nizami rayonunda
+                                    <span class="text-primary">
+                                        (Icare
+                                        axtariram)
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class=" body col-lg-8 col-sm-7 col-12">
+                                <p class="p-2 m-0">
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+
+
+                                </p>
+                            </div>
+                            <div class=" orderman col-lg-4 col-sm-5 col-12">
+                                <div class="row flex-row flex-sm-column flex-md-row  p-1 m-0">
+                                    <div class="img-order col-md-3 col-sm-12 col-3 p-0 d-flex justify-content-center">
+                                        <div class="img-order-d">
+                                            <img src="~/Images/profile/empty-profile.png" class="img-fluid w-100">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-9">
+                                        <span class="bold">
+                                            <i class="fas fa-user-alt fa-xs mr-1"></i> Arife ismayilova
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-2 p-0">
+                    <div class="one-order  ">
+                        <!-- head-max length 100, -->
+                        <!-- body-max length 200 -->
+                        <div class="row">
+                            <div class="head col-12">
+                                <h5 class="p-1 m-0">
+                                    Kirayə həyət evi
+                                    nizami rayonundaKirayə həyət evi nizami rayonunda
+                                    <span class="text-primary">
+                                        (Icare
+                                        axtariram)
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class=" body col-lg-8 col-sm-7 col-12">
+                                <p class="p-2 m-0">
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+
+
+                                </p>
+                            </div>
+                            <div class=" orderman col-lg-4 col-sm-5 col-12">
+                                <div class="row flex-row flex-sm-column flex-md-row  p-1 m-0">
+                                    <div class="img-order col-md-3 col-sm-12 col-3 p-0 d-flex justify-content-center">
+                                        <div class="img-order-d">
+                                            <img src="~/Images/profile/empty-profile.png" class="img-fluid w-100">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-9">
+                                        <span class="bold">
+                                            <i class="fas fa-user-alt fa-xs mr-1"></i> Arife ismayilova
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-2 p-0">
+                    <div class="one-order  ">
+                        <!-- head-max length 100, -->
+                        <!-- body-max length 200 -->
+                        <div class="row">
+                            <div class="head col-12">
+                                <h5 class="p-1 m-0">
+                                    Kirayə həyət evi
+                                    nizami rayonundaKirayə həyət evi nizami rayonunda
+                                    <span class="text-primary">
+                                        (Icare
+                                        axtariram)
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class=" body col-lg-8 col-sm-7 col-12">
+                                <p class="p-2 m-0">
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+                                    1234567890
+
+
+                                </p>
+                            </div>
+                            <div class=" orderman col-lg-4 col-sm-5 col-12">
+                                <div class="row flex-row flex-sm-column flex-md-row  p-1 m-0">
+                                    <div class="img-order col-md-3 col-sm-12 col-3 p-0 d-flex justify-content-center">
+                                        <div class="img-order-d">
+                                            <img src="~/Images/profile/empty-profile.png" class="img-fluid w-100">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-9">
+                                        <span class="bold">
+                                            <i class="fas fa-user-alt fa-xs mr-1"></i> Arife ismayilova
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                        <br>
+                                        <span class="Number-anonym">
+                                            <i class="fas fa-mobile-alt  mr-2"></i>051 373
+                                            92
+                                            77
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Order-filter end -->
+

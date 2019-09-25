@@ -1,0 +1,52 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "DaxilOl";
+}
+
+<!-- logIn start -->
+<section id="logIn">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-12">
+                <h2>Hesaba giriş</h2>
+            </div>
+        </div>
+        <form method="post">
+            <div class="row">
+                <div class="col-12 validation-error" asp-validation-summary="ModelOnly"></div>
+                <div class="col-md-6 col-12 ">
+                    <input asp-for="Email" class="form-control my-4" placeholder="Email">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 ">
+                    <input asp-for="Password" class="form-control my-4" placeholder="Şifrə">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 order-1">
+                    <a asp-controller="Hesab" asp-action="Qeydiyat" class="btn blue-bg btn-block my-4">Qeydiyat</a>
+                </div>
+                <div class="col-md-6 col-12  order-2">
+                    <input type="submit" value="Daxil ol" class="btn green-bg btn-block  my-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-danger d-flex justify-content-end ">
+                    <a asp-controller="Hesab" asp-action="Şifrəniunutmuşam">Şifrəni unutmusan?</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+<!-- logIn end -->
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<News>
+@{
+    ViewData["Title"] = "Xəbərlər";
+}
+
+<section id="News">
+    <div class="container ">
+        <div class="row mt-2">
+            <div class="col-12">
+                <h3>Xəbərlər</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            @foreach (var item in Model)
+            {
+                <a asp-controller="Xəbərlər" asp-action="Haqqında" class="col-xl-4 col-lg-6 col-sm-10 col-12" data-aos="flip-up">
+                    <div class="new-item">
+                        <!-- 60 heading -->
+
+                        <div class="overlay  d-flex align-items-end">
+                            <div class="new-properties ">
+                                <h6 class="text-right ">
+                                    @if (item.Title.Length > 50)
+                                    {
+                                        item.Title.Substring(0, 50);
+                                    }
+                                    else
+                                    {
+                                        @item.Title
+                                    }
+                                </h6>
+                                <p class="text-right">
+                                    @item.Info.Substring(0,255)
+                                </p>
+                                <div class="text-right text-white">
+                                    <span class="New-View all"><i class="far fa-eye"></i> @item.ViewCount </span>
+                                    <span class="ml-2 New-Date all">
+                                        <i class="far fa-calendar-alt"></i>
+                                        @String.Format("{0:MM/dd/yyyy}", item.PublishDate)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="~/Images/News/@item.ImageUrl" class="img-fluid w-100">
+                    </div>
+                </a>
+            }
+        </div>
+        <div class="row">
+            <div class="load-more  my-2 col-md-4 col-6" data-aos="flip-down">
+                <a href="#" class="btn Btn-yellow  btn-block">
+                    <i class="fas fa-plus"></i> Daha
+                    çox
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+

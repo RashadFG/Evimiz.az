@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daşınmaz əmlakın kirayəsi">
+    <meta name="keywords"
+          content="kiraye,icare,satish,dashinmaz,emlak,mulk,menzil,ev,villa,bag,torpaq,qaraj,ofis,obyekt,ayliq,gunluk,reklam,rent,house,home,estate,garden,property,sale">
+    <meta name="author" content="Rəşad Quluzadə">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="~/Images/property-icon.jpg" />
+    <title>Evimiz.az</title>
+    <!-- <link  href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    @if (ViewBag.Edit == "DüzəlişEt")
+    {
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    }
+    <link rel="stylesheet" href="~/font/stylesheet.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="preloader d-flex justify-content-center align-items-center">
+        <img src="~/Images/building_loader.gif" class="img-fluid">
+    </div>
+
+    <!-- mobile version  start -->
+    <div class="d-none  align-items-center moblie-dropdown  p-0 ">
+        <div class="col-12 ">
+            <div class="row justify-content-center  py-5">
+                <div class="col-md-6 col-8 ">
+                    <div class="row">
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="AnaSəhifə"><i class="fas fa-home mr-2 color-blue"></i>Əsas səhifə</a></div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Xəbərlər"> <i class="far fa-newspaper mr-2 color-blue"></i>Xəbərlər</a> </div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Əmlakçılar"><i class="far fa-handshake mr-2 color-blue"></i> Əmlakçılar</a></div>
+                        <div class="col-12 li"><a asp-controller="Evimiz" asp-action="Sifarişlər"><i class="fas fa-bookmark  mr-2 color-blue"></i> Alıcının sifarişi</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-8 ">
+                    <div class="row justify-content-center">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="col-9">
+                                <div class="items mt-2">
+                                    <a asp-controller="Hesab" asp-action="DaxilOl"><i class="fas fa-sign-in-alt"></i> Daxil ol</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="items mt-2">
+                                    <a asp-controller="Hesab" asp-action="Qeydiyat"><i class="fas fa-user-plus"></i> Qeydiyat</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-9">
+                                <div class="items  mt-2">
+                                    <a asp-controller="Hesab" asp-action="Çıxış"> <i class="fas fa-sign-out-alt"></i> Çıxış</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="items  mt-2">
+                                    <a asp-controller="Evimiz" asp-action="Profilim"> <i class="fas fa-user-circle"></i> Profilim</a>
+                                </div>
+                            </div>
+
+                        }
+                        <div class="col-9">
+                            <div class=" single-item mt-2">
+                                <a asp-controller="Elan" asp-action="Yarat"><i class="fas fa-plus"></i> Elan ver</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="fas fa-times close-phone-menu-list fa-2x"></i>
+    </div>
+    <!-- mobile version  end -->
+    <!-- header start -->
+    <header class="header-home">
+        <div class="container-fluid p-0">
+            <div class="container ">
+                <!-- deskopt -->
+                <div class="row Header">
+                    <div class="col-lg-3  col-6 ">
+                        <a asp-controller="Evimiz" asp-action="AnaSəhifə">
+                            <img src="~/Images/property-icon.jpg" class="img-fluid img-logo">
+                            <span class="logo">E v i m i z</span>
+                        </a>
+                    </div>
+                    <div class="col-9 d-none d-lg-block">
+                        <ul class="d-flex justify-content-end header-ul ">
+                            <li><a asp-controller="Evimiz" asp-action="AnaSəhifə"><i class="fas fa-home mr-2 color-blue"></i>Əsas səhifə</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Xəbərlər"> <i class="far fa-newspaper mr-2 color-blue"></i>Xəbərlər</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Əmlakçılar"><i class="far fa-handshake mr-2 color-blue"></i> Əmlakçılar</a></li>
+                            <li><a asp-controller="Evimiz" asp-action="Sifarişlər"><i class="fas fa-bookmark  mr-2 color-blue"></i> Alıcının sifarişi</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6  d-lg-none p-0">
+                        <div class="d-flex justify-content-end Menu">
+                            <div class="iconBorder d-flex justify-content-center align-items-center">
+                                <i class="fas fa-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header start -->
+    @if (ViewBag.Home == "Home")
+    {
+        <!-- slider start -->
+        <section id="slider">
+            <div class="container">
+                <div class="row p-0">
+                    <div class="col-12 p-0">
+                        <div class="window">
+                            <ul class="d-flex slider-lent">
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/Massive/Cammur4.png" class="img-fluid w-100">
+                                        <div class="slider-box d-none" data-aos="zoom-out-up">
+                                            <div class="row">
+                                                <div class="col-11 ">
+                                                    <div class="Massive-info m-2 row p-0">
+                                                        <div class="col-12">
+                                                            <h4>Yeni Həyat yaşayış kompleksi</h4>
+                                                            <p>
+                                                                Lorem tandard dummy text ever since the
+                                                                1500s,
+                                                                when an unknown printer took a galley of
+                                                                type and
+                                                                scrambled it to make a type specimen
+                                                                book...
+                                                            </p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="Massive-Price p-1">1000$/m<sup>2</sup></span>
+                                                                <span>
+                                                                    <a href="~/#">
+                                                                        Ətrafli <i class="fas fa-angle-double-right"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p>
+                                                                <i class="fas fa-map-marker-alt locaIcon"></i>
+                                                                Baki..Xetai
+                                                                rayonu
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-left arrow-left "></i>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-right arrow-right "></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/Massive/24cc77f24fa7.jpg" class="img-fluid w-100">
+                                        <div class="slider-box d-none data-aos=" zoom-out-up"">
+                                            <div class="row">
+                                                <div class="col-11 ">
+                                                    <div class="Massive-info m-2 row p-0">
+                                                        <div class="col-12">
+                                                            <h4>Viva yaşayış kompleksi</h4>
+                                                            <p>
+                                                                Lorem tandard dummy text ever since the
+                                                                1500s,
+                                                                when an unknown printer took a galley of
+                                                                type and
+                                                                scrambled it to make a type specimen
+                                                                book...
+                                                            </p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="Massive-Price p-1">1000$/m<sup>2</sup></span>
+                                                                <span>
+                                                                    <a href="~/#">
+                                                                        Ətrafli<i class="fas fa-angle-double-right"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p>
+                                                                <i class="fas fa-map-marker-alt locaIcon"></i>
+                                                                Baki..Xetai
+                                                                rayonu
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-left arrow-left "></i>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-right arrow-right "></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="~/#">
+                                        <img src="~/Images/Massive/project189_353.jpg" class="img-fluid w-100">
+                                        <div class="slider-box d-none data-aos=" zoom-out-up"">
+                                            <div class="row">
+                                                <div class="col-11  ">
+                                                    <div class="Massive-info m-2 row p-0">
+                                                        <div class="col-12">
+                                                            <h4>Ugur yaşayış kompleksi</h4>
+                                                            <p>
+                                                                Lorem tandard dummy text ever since the
+                                                                1500s,
+                                                                when an unknown printer took a galley of
+                                                                type and
+                                                                scrambled it to make a type specimen
+                                                                book...
+                                                            </p>
+                                                            <div class="d-flex justify-content-between">
+                                                                <span class="Massive-Price p-1">1000$/m<sup>2</sup></span>
+                                                                <span>
+                                                                    <a href="~/#">
+                                                                        Ətrafli<i class="fas fa-angle-double-right"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <p>
+                                                                <i class="fas fa-map-marker-alt locaIcon"></i>
+                                                                Baki..Xetai
+                                                                rayonu
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-left arrow-left "></i>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <i class="fas fa-angle-right arrow-right "></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </a>
+
+                                </li>
+
+                            </ul>
+                            <div class=" d-lg-none d-block  Arrows">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <i class="fas fa-angle-left arrow-left "></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <i class="fas fa-angle-right arrow-right "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overlay-sldier"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- slider start -->
+    }
+
+    <!-- search-box start -->
+    <section id="search-box">
+        <div class="container ">
+            @if (ViewBag.Home == "Home")
+            {
+                <!-- Koplexlər -->
+                <div class="row ">
+                    <div class="col-lg-6 col-12">
+                        <ul class="d-flex left-ul">
+                            <li class="active box-shadow-f" data-id="1"><i class="fas fa-search mr-2  "></i>Al</li>
+                            <li class="ml-2 box-shadow-f" data-id="2"><i class="fas fa-search mr-2 "></i>Kirayə</li>
+                            <li class="ml-2 box-shadow-f" data-id="3"><i class="fas fa-search mr-2"></i>Ətraflı</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class=" row  d-flex justify-content-lg-end Massive-Advertisement">
+                            <ul class="d-lg-flex right-ul">
+                                <li>
+                                    <a href="~/#">
+                                        <i class="fas fa-building"></i> Yaşayış kompleksləri <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Satış -->
+                <div class="d-none  under-tabs tab-active" data-id="1">
+                    <div class="row ">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Yeni tikili otaq sayı</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Köhnə tikili otaq sayı</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Rayonlar</option>
+                                <option value="">Abşeron </option>
+                                <option value="">Binəqədi</option>
+                                <option value="">Nərimanov </option>
+                                <option value="">Nizami</option>
+                                <option value="">Pirallahı</option>
+                                <option value="">Qaradağ</option>
+                                <option value="">Sabunçu</option>
+                                <option value="">Suraxanı</option>
+                                <option value="">Səbail</option>
+                                <option value="">Xətai</option>
+                                <option value="">Xəzər </option>
+                                <option value="">Yasamal</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="Btn-first">
+                                <div class="btn-overlay"></div>
+                                <input class=" btn btn-block " type="submit" value="Axtar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- İcarə -->
+                <div class="d-none under-tabs" data-id="2">
+                    <div class="row ">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Yeni tikili otaq sayı</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Köhnə tikili otaq sayı</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <select class="form-control">
+                                <option value="">Rayonlar</option>
+                                <option value="">Abşeron </option>
+                                <option value="">Binəqədi</option>
+                                <option value="">Nərimanov </option>
+                                <option value="">Nizami</option>
+                                <option value="">Pirallahı</option>
+                                <option value="">Qaradağ</option>
+                                <option value="">Sabunçu</option>
+                                <option value="">Suraxanı</option>
+                                <option value="">Səbail</option>
+                                <option value="">Xətai</option>
+                                <option value="">Xəzər </option>
+                                <option value="">Yasamal</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="Btn-first">
+                                <div class="btn-overlay"></div>
+                                <input class=" btn btn-block " type="submit" value="Axtar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ümumi -->
+                <div class="d-none under-tabs" data-id="3">
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="col-12">
+                                <select class="form-control ">
+                                    <option value="">Elanın növü</option>
+                                    <option value="">Satılır</option>
+                                    <option value="">Kirayə aylıq</option>
+                                    <option value="">Kirayə günlük</option>
+
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-control mt-1">
+                                    <option value="">Əmlakın növü</option>
+                                    <option value="">Yeni tikili</option>
+                                    <option value="">Köhnə tikili</option>
+                                    <option value="">Həyət evi</option>
+                                    <option value="">Bağ evi</option>
+                                    <option value="">Ofis</option>
+                                    <option value="">Qaraj</option>
+
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-control mt-1">
+                                    <option value="">Yeni tikili otaq sayı</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-control mt-1">
+                                    <option value="">Yeni tikili otaq sayı</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="row m-0">
+                                <div class="col-4">Otaq sayı</div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="min(sayı)" /></div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="max(sayı)" /></div>
+                            </div>
+                            <div class="row m-0 mt-1">
+
+                                <div class="col-4">Sahəsi</div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="min(kvm)" /></div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="max(kvm)" /></div>
+                            </div>
+                            <div class="row m-0 mt-1">
+                                <div class="col-4">Qiyməti</div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="min(Azn)" /></div>
+                                <div class="col-4"><input type="text" class="form-control input-size" placeholder="max(Azn)" /></div>
+                            </div>
+                            <div class="row m-0 mt-1">
+                                <div class="col-4"><input type="checkbox" class="" placeholder="min(Azn)" />Kupçalı</div>
+                                <div class="col-8"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4  co-md-6 col-12 a">
+                            <button class=" btn btn-block Btn-yellow mt-2"><i class="fas fa-trash-alt"></i>Təmizlə</button>
+                            <div class="Btn-first mt-2">
+                                <div class="btn-overlay"></div>
+                                <input class=" btn btn-block " type="submit" value="Axtar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- Addres -->
+            <div class="logIn-register d-none">
+                <div class="row ">
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            <p class="m-0">
+                                Əlaqə: +994 12 579 04 02, <br class="d-lg-none d-block">Reklam: +994 51 373
+                                92 77
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <p class="m-0">
+                                İş saatları: 1-5- ci günlər. 9:00-19:00,<br class="d-lg-none d-block"> 6 ci
+                                gun
+                                9:00 - 14:00
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="row m-0">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="DaxilOl"><i class="fas fa-sign-in-alt"></i> Daxil ol</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="Seçim"><i class="fas fa-user-plus"></i> Qeydiyat</a>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Hesab" asp-action="Çıxış"> <i class="fas fa-sign-out-alt"></i> Çıxış</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="items">
+                                        <a asp-controller="Evimiz" asp-action="Profilim"> <i class="fas fa-user-circle"></i> Profilim</a>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-lg-4 col-12">
+                                <div class=" single-item">
+                                    <a asp-controller="Elan" asp-action="Yarat"><i class="far fa-plus-square fa-1x"></i> Elan ver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- search-box end -->
+
+    @RenderBody()
+
+    <!-- footer start -->
+    <footer>
+        <div class="container">
+            <div class="row m-0">
+                <div class="col-lg-6 col-12">
+                    <div class="row ">
+                        <div class="col-md-4 col-6 mt-2">
+                            <ul>
+                                <span class="F-header">Umumi </span>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="AnaSəhifə">Əsas səhifə</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Xəbərlər">Xəbərlər</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Əmlakçılar">Əmlakçılar</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Haqqımızda">Haqqımızda</a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-6 mt-2">
+                            <ul>
+                                <span class="F-header">Elanlar </span>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Elanlar">Elanlar</a> </li>
+                                <li class="mt-2"><a asp-controller="Elan" asp-action="Yarat">Elan yerləşdirin</a> </li>
+                                <li class="mt-2"><a href="~/#">Satış</a> </li>
+                                <li class="mt-2"><a href="~/#">İcarə</a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-12 mt-2">
+                            <ul>
+                                <span class="F-header">Bizimlə əlaqə </span>
+                                <li class="mt-2"><a href="~/#">Əlaqə</a> </li>
+                                <li class="mt-2"><a href="~/#">Saytda reklam</a> </li>
+                                <li class="mt-2"><a asp-controller="Evimiz" asp-action="Haqqımızda"> Portal haqqında</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 mt-2">
+                    <span class="F-header">Elanlar(100) </span>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul>
+                                <li class="mt-2"><a href="~/#">Yeni tikili (2897)</a> </li>
+                                <li class="mt-2"><a href="~/#">Köhnə tikili (1298)</a> </li>
+                                <li class="mt-2"><a href="~/#">Həyət evi (1291)</a> </li>
+                                <li class="mt-2"><a href="~/#">Bağ evi (491)</a> </li>
+                                <li class="mt-2"><a href="~/#">Ofis (99)</a> </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul>
+                                <li class="mt-2"><a href="~/#">Qaraj (8)</a> </li>
+                                <li class="mt-2"><a href="~/#">Torpaq (608)</a> </li>
+                                <li class="mt-2"><a href="~/#">Obyekt (252)</a> </li>
+                                <li class="mt-2"><a href="~/#">Xaricdə əmlak (15)</a> </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- footer end -->
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script> -->
+
+
+    @if (ViewBag.Edit == "DüzəlişEt")
+    {
+        <!-- slider plugin-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    }
+
+    <!-- font -->
+    <script src="https://kit.fontawesome.com/c598aedde7.js"></script>
+    <script src="~/jquery/jquery-3.4.1.min.js"></script>
+
+    <script src="~/src/main.js"></script>
+    @if (ViewBag.Home != "Home")
+    {
+        <script src="~/src/header.js"></script>
+    }
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

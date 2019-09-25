@@ -1,0 +1,245 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Qeydiyat";
+}
+
+<!-- Register start -->
+<section id="Register" >
+    <div class="container py-5">
+        <div class="row my-4">
+            <div class="col-12">
+                <h2 class="bold">Qeydiyyat</h2>
+            </div>
+        </div>
+        <form enctype="multipart/form-data" method="post">
+            <div class="col-12 validation-error" asp-validation-summary="ModelOnly"></div>
+
+            @if (ViewBag.User == "User")
+            {
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <input class="form-control my-2 p-2" placeholder="Ad" asp-for="Firstname">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Firstname"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <input class="form-control my-2 p-2" placeholder="Soyad" asp-for="Lastname">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Lastname"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <input class="form-control my-2 p-2" placeholder="Email" asp-for="Email">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <input class="form-control my-2 p-2" placeholder="İstifadəçi adı" asp-for="Username">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Username"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <select class="form-control my-2 p-2" asp-items="@(new SelectList(ViewBag.NumberKeyCode, "Id", "Kcode"))"
+                                        asp-for="NumberKeyCodeId"></select>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control my-2 p-2" placeholder="Nömrə" asp-for="PhoneNumber">
+                                <div class="validation-error my-2 p-2">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="PhoneNumber"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 order-2 order-md-0">
+                        <input class="form-control my-2 p-2" placeholder="Şifrə" asp-for="Password">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Password"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 order-1 order-md-0">
+                        <div class="row  d-none plus-div">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <select class="form-control mt-2" 
+                                            asp-items="@(new SelectList(ViewBag.NumberKeyCodeSecond, "Id", "Kcode"))"
+                                             asp-for="NumberKeyCodeSecondId"></select>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-group position-relative">
+                                    <input class="form-control   mt-2" placeholder="Növbəti nömrə" asp-for="SecondPhonenumber">
+                                    <div class="validation-error">
+                                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                        <span asp-validation-for="SecondPhonenumber"></span>
+                                    </div>
+                                </div>
+                                <span class="ft-s"><i class="fas fa-window-close close-input"></i></span>
+
+                            </div>
+                        </div>
+                        <div class="col-12 p-0">
+                            <div class="add-phoneNumber   mt-2 Yellow-bg ">
+                                <i class="fas fa-plus mr-3"></i>Əlavə nömrə
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 order-2 order-md-0">
+                        <input class="form-control my-2 p-2" placeholder="Təsdiq şifrəsi" asp-for="ConfirePassword">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="ConfirePassword"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 order-2 order-md-0">
+                        <div class="upload-user-img my-2 text-center orange">
+                            <i class="fas fa-upload mr-3"></i> Şəkil əlavə edin
+                            <input class="form-control  user-img d-none" asp-for="UserPhoto">
+                        </div>
+                        <div class="validation-error my-2 p-2 ">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="UserPhoto"></span>
+                        </div>
+                        <div class="border-image d-flex justify-content-center ">
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.Agent == "Agent")
+            {
+                <div class="Agents-div-a ">
+                    <div class="row ">
+                        <div class="col-md-6  col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="Əmlakçının adı" asp-for="Firstname">
+                                        <div class="validation-error">
+                                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="Firstname"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <select class="form-control my-2 p-2" asp-for="NumberKeyCodeId"
+                                                    asp-items="@(new SelectList(ViewBag.NumberKeyCode, "Id", "Kcode"))"></select>
+                                        </div>
+                                        <div class="col-8">
+                                            <input class="form-control my-2 p-2" placeholder="Nömrə" asp-for="PhoneNumber">
+                                            <div class="validation-error my-2 p-2">
+                                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="PhoneNumber"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row  d-none plus-div">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <select class="form-control mt-2" asp-for="NumberKeyCodeSecondId"
+                                                        asp-items="@(new SelectList(ViewBag.NumberKeyCodeSecond, "Id", "Kcode"))"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-group position-relative">
+                                                <input type="text" class="form-control   mt-2" placeholder="Növbəti nömrə" asp-for="SecondPhonenumber">
+                                                <div class="validation-error">
+                                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="SecondPhonenumber"></span>
+                                                </div>
+                                            </div>
+                                            <span class="ft-s"><i class="fas fa-window-close close-input"></i></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-0">
+                                        <div class="add-phoneNumber Yellow-bg  mt-2  ">
+                                            <i class="fas fa-plus mr-3"></i>Əlavə nömrə
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  col-12">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="8" asp-for="Agencyabout" placeholder="Əmlakçı haqqında"></textarea>
+                                <div class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                    <span asp-validation-for="Agencyabout"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <input type="text" class="form-control my-2 p-2" placeholder="Email" asp-for="Email">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <input class="form-control my-2 p-2" placeholder="İstifadəçi adı" asp-for="Username">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="Username"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 order-2 order-md-0">
+                            <input class="form-control my-2 p-2" placeholder="Şifrə" asp-for="Password">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 order-2 order-md-0">
+                            <input class="form-control my-2 p-2" placeholder="Təsdiq şifrəsi" asp-for="ConfirePassword">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="ConfirePassword"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-6 col-12 about-city">
+                            <div class="form-group ">
+                                <label for="">Rayon</label>
+                                <select class="form-control " asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))" asp-for="RegionId"></select>
+                                <div class="validation-error">
+                                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i><span asp-validation-for="RegionId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <div class="Imgae-download text-center btn btn-block my-2 orange">
+                                    <i class="fas fa-upload mr-3"></i> Şəkil yüklə
+                                    <input hidden class="img-advertisement-down" asp-for="AgencyPhoto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row Image-download-area justify-content-center">
+                    </div>
+                </div>
+            }
+            <input type="submit" class=" form-control mt-2 btn-block green-bg register" value="Qeydiyyatdan keç">
+        </form>
+    </div>
+
+</section>
+<!-- Register end -->
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

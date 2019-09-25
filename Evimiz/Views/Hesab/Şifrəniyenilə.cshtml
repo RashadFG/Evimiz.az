@@ -1,0 +1,97 @@
+﻿@model ResetAndSetNewPasswordViewModel
+
+@{
+    ViewData["Title"] = "Şifrəniyenilə";
+}
+
+<!-- forgivePassword start -->
+<section id="logIn">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-12">
+                <h2>Şifrəni yenilə</h2>
+            </div>
+        </div>
+        <form  method="post">
+            <div class="row">
+                <div class="col-12 validation-error" asp-validation-summary="ModelOnly"></div>
+                <div class=" col-12 ">
+                    <input asp-for="NewPassword" class="form-control my-4" placeholder="Yeni şifrə">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="NewPassword"></span>
+                    </div>
+                </div>
+                <div class=" col-12 ">
+                    <input asp-for="ConfirmNewPassword" class="form-control my-4" placeholder="Təsdiq şifrə">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="ConfirmNewPassword"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <input asp-for="UserId" type="hidden" value="@ViewBag.UserId">
+                    <input asp-for="PasswordResetToken" type="hidden" value="@ViewBag.PasswordResetToken">
+                </div>
+                <div class="col-12  order-2">
+                    <input type="submit" value="Şifrəni dəyiş" class="btn btn-block  my-4 blue-bg">
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+<!-- forgivePassword end -->
+@*<!-- LAYER FOR HEADER section start -->
+    <section id="layer-for-header">
+        <div class="container-fluid">
+            <div class="custom-container-fluid">
+            </div>
+        </div>
+    </section>
+    <!-- LAYER FOR HEADER section end -->
+    <!-- CHANGE PASSWORD section start -->
+    <section id="change-password">
+        <div class="container-fluid">
+            <div class="custom-container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="page-heading">Hesab şifrəsini bərpa et</h3>
+                        <form asp-controller="Hesab" asp-action="Shifrenideyish" method="post" class="row change-password-container">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <div asp-validation-summary="ModelOnly" class="input-error-message-summary"></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input asp-for="NewPassword" class="change-password-pass input-login-register-pages" type="password"
+                                           placeholder="Yeni şifrə">
+                                    <span asp-validation-for="NewPassword" class="input-error-message"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input asp-for="ConfirmNewPassword" class="change-password-confirm input-login-register-pages" type="password"
+                                           placeholder="Təsdiq şifrəsi">
+                                    <span asp-validation-for="ConfirmNewPassword" class="input-error-message"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <input class="change-password-submit input-login-register-pages input-btn-login-register"
+                                       type="submit" value="Şifrəni dəyiş">
+                            </div>
+                            <div class="col-xs-12">
+                                <input asp-for="UserId" type="hidden" value="@ViewBag.UserId">
+                                <input asp-for="PasswordResetToken" type="hidden" value="@ViewBag.PasswordResetToken">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 change-password-photo-container">
+                        <img src="~/MainPageFiles/images/change-password.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CHANGE PASSWORD section end -->*@

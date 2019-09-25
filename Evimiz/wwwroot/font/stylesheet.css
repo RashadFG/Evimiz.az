@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Presquire';
+    src: url('Presquire-Normal.woff2') format('woff2'),
+        url('Presquire-Normal.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Salamander Script';
+    src: url('SalamanderScript-Bold.woff2') format('woff2'),
+        url('SalamanderScript-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anglecia Pro Display';
+    src: url('AngleciaProDisplay.woff2') format('woff2'),
+        url('AngleciaProDisplay.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Handel Gothic';
+    src: url('HandelGothic.woff2') format('woff2'),
+        url('HandelGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

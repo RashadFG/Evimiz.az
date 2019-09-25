@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewData["Title"] = "DuzəlişEt";
+}
+
+    <!-- Register start -->
+    <section id="Register">
+        <div class="container">
+            <div class="row my-4">
+                <div class="col-12">
+                    <h2>Agentlikdə dəyişiklik</h2>
+                </div>
+            </div>
+            <div class="Agents-div  d-block" >
+                <div class="row ">
+                    <div class="col-md-6  col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="">Agentliyin adı</label>
+                                    <input type="text" class="form-control" placeholder="Əmlakın adı">
+                                    <span class="validation-error">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <select class="form-control my-2 p-2">
+                                            <option value="">+99451</option>
+                                            <option value="">+99450</option>
+                                            <option value="">+99470</option>
+                                            <option value="">+99477</option>
+                                            <option value="">+99455</option>
+                                            <option value="">+99460</option>
+                                            <option value="">+99440</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control my-2 p-2" placeholder="Nömrə">
+                                        <span class="validation-error my-2 p-2">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>Eror</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row  d-none plus-div">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select class="form-control mt-2">
+                                                <option value="">+99451</option>
+                                                <option value="">+99450</option>
+                                                <option value="">+99470</option>
+                                                <option value="">+99477</option>
+                                                <option value="">+99455</option>
+                                                <option value="">+99460</option>
+                                                <option value="">+99440</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group position-relative">
+                                            <input type="text" class="form-control   mt-2" placeholder="Növbəti nömrə">
+                                            <span class="validation-error">
+                                                <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                                        </div>
+                                        <span class="ft-s"><i class="fas fa-window-close close-input"></i></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0">
+                                    <div class="add-phoneNumber Yellow-bg  mt-2  "> <i
+                                            class="fas fa-plus mr-3"></i>Əlavə nömrə
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  col-12">
+                        <div class="form-group">
+                            <label for="">Agentlik haqqında </label>
+                            <textarea class="form-control" rows="8"></textarea>
+                            <span class="validation-error">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                Error</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-6 col-12">
+                        <div class="form-group ">
+                            <label for="">Şəhər</label>
+                            <select class="form-control City">
+                                <option value="" data-id="1">Ağdam</option>
+                                <option value="" data-id="2">Ağdaş</option>
+                                <option value="" data-id="3">Agcabedi</option>
+                                <option value="" data-id="4">Ağstafa</option>
+                                <option value="" data-id="5">Ağsu</option>
+                                <option value="" data-id="6">Astara</option>
+                                <option value="" data-id="7">Babək</option>
+                                <option value="" data-id="8">Bakı</option>
+                                <option value="" data-id="9">Balakən</option>
+                                <option value="" data-id="10">Bərdə</option>
+                                <option value="" data-id="11">Beyləqan</option>
+                                <option value="" data-id="12">Agcabedi</option>
+                            </select>
+                            <span class="validation-error">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 about-city d-none">
+                        <div class="form-group ">
+                            <label for="">Rayon</label>
+                            <select class="form-control ">
+                                <option value="" data-id="1">Abşeron r.</option>
+                                <option value="" data-id="2">Binəqədi r.</option>
+                                <option value="" data-id="3">Nizami r.</option>
+                                <option value="" data-id="4">Nərimanov r.</option>
+                                <option value="" data-id="5">Nəsimi r.</option>
+                                <option value="" data-id="6">Pirallahı</option>
+                                <option value="" data-id="7">Qaradağ r.</option>
+                                <option value="" data-id="8">Sabunçu r.</option>
+                                <option value="" data-id="9">Suraxanı r.</option>
+                                <option value="" data-id="10">Səbail r.</option>
+                                <option value="" data-id="11">Xətai r.</option>
+                                <option value="" data-id="12">Xəzər r.</option>
+                                <option value="" data-id="13">Yasamal r.</option>
+
+                            </select>
+                            <span class="validation-error">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 about-city d-none">
+                        <div class="form-group ">
+                            <label for="">Qəsəbə</label>
+                            <select class="form-control ">
+                                <option value="" data-id="1">1 mkr</option>
+                                <option value="" data-id="2">2 mkr </option>
+                                <option value="" data-id="3">20-ci sahə</option>
+                                <option value="" data-id="4">28 May</option>
+                                <option value="" data-id="5">3 mkr</option>
+                                <option value="" data-id="6">4 mkr</option>
+                                <option value="" data-id="7">5 mkr</option>
+                                <option value="" data-id="8">6 mkr</option>
+                                <option value="" data-id="9">7 mkr</option>
+                                <option value="" data-id="10">8 mkr</option>
+                                <option value="" data-id="11">9 mkr</option>
+                                <option value="" data-id="12">Ağ şəhər</option>
+                                <option value="" data-id="13">Alatava 1</option>
+                                <option value="" data-id="13">Alatava 2</option>
+                                <option value="" data-id="13">Albalı</option>
+                                <option value="" data-id="13">Altaylı</option>
+                                <option value="" data-id="13">Badamdar</option>
+                                <option value="" data-id="13">Bahar</option>
+                                <option value="" data-id="13">Bakixanov</option>
+                                <option value="" data-id="13">Balaxnı</option>
+                                <option value="" data-id="13">Bayıl</option>
+                                <option value="" data-id="13">Bibiheybət</option>
+                                <option value="" data-id="13">Alvalı</option>
+                            </select>
+                            <span class="validation-error">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 about-city d-none">
+                        <div class="form-group ">
+                            <label for="">Metro</label>
+                            <select class="form-control ">
+                                <option value="" data-id="1">20 yanvar m.</option>
+                                <option value="" data-id="2">28 may m. </option>
+                                <option value="" data-id="2">28 may m. </option>
+                                <option value="" data-id="2">28 may m. </option>
+                                <option value="" data-id="2">28 may m. </option>
+
+                            </select>
+                            <span class="validation-error">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Error</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row Image-download-area justify-content-center">
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-12">
+                    <input type="submit" class=" form-control mt-2 btn-block green-bg" value="Düzəliş et">
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Register end -->
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Seçim";
+}
+
+<section id="Change-Profile">
+    <div class="container" style=" background-image: url('../images/house.jpg');">
+        <div class="row py-5 justify-content-center">
+            <div class="col-5">
+                <div class="h3-div">
+                    <h1 class="text-center heading-h3 ">Hesabınızı seçin</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-6">
+                <a asp-controller="Hesab" asp-action="Qeydiyat" asp-route-userrole="İstifadəçi">
+                    <div class="change-div text-center  py-5">
+                        <div class="icon-div d-flex justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <i class="fas fa-user fa-2x "></i>
+                            </div>
+                        </div>
+                        <h2>İstifadəçi</h2>
+                        <p>İstifadəçi kimi qeydiyatdan keç</p>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-6">
+                <a asp-controller="Hesab" asp-action="Qeydiyat" asp-route-userrole="Əmlakçı">
+                    <div class="change-div text-center py-5">
+                        <div class="icon-div d-flex justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <i class="far fa-handshake  fa-2x"></i>
+                            </div>
+                        </div>
+                        <h2>Əmlakçı</h2>
+                        <p>Əmlakçı kimi qeydiyatdan keç və virtual ofisini yarat</p>
+
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
