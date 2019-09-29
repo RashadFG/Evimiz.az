@@ -10,14 +10,14 @@ namespace Evimiz.Models
     {
         public Village()
         {
-            Homes = new HashSet<Home>();
+            Advertisements = new HashSet<Advertisement>();
         }
         public int Id { get; set; }
 
         [Required, StringLength(100)]
         public string Name { get; set; }
 
-        public virtual ICollection<Home> Homes { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
 
     }
 }

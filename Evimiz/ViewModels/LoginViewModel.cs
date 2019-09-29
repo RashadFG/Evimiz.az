@@ -8,10 +8,10 @@ namespace Evimiz.ViewModels
 {
     public class LoginViewModel
     {
-        [Required, EmailAddress, DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Emailinizi daxil edin"), EmailAddress(ErrorMessage = "Düzgun email daxil edin"), DataType(DataType.EmailAddress, ErrorMessage = "Düzgun email daxil edin")]
         public string Email { get; set; }
 
-        [Required, DataType(DataType.Password)]
+        [Required(ErrorMessage = "İstifadəçi parolunuzu daxil edin"), DataType(DataType.Password, ErrorMessage = "Düzgün şifrə qəbul edin")]
         public string Password { get; set; }
     }
 }

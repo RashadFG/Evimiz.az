@@ -13,6 +13,8 @@ namespace Evimiz.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        public bool IsMainPhoto { get; set; }
+
         public int AdvertisementId { get; set; }
         public virtual Advertisement Advertisement { get; set; }
     }

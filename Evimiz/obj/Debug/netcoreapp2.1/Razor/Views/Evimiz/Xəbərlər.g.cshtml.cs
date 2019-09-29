@@ -79,7 +79,7 @@ using Evimiz.ViewModels;
             WriteLiteral("                ");
             EndContext();
             BeginContext(383, 1693, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8fed8de449ea444aa0ed9fbac408f0b3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3e0e9ad57b5e45bcb179d6f0e7dc6474", async() => {
                 BeginContext(496, 281, true);
                 WriteLiteral(@"
                     <div class=""new-item"">
@@ -148,7 +148,7 @@ using Evimiz.ViewModels;
                 WriteLiteral("\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        ");
                 EndContext();
                 BeginContext(1962, 64, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "076bab03eade42e1999fde0e9d1cbb0f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "3353e79b9e6144a5a722cd2205b06939", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

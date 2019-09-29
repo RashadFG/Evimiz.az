@@ -23,7 +23,7 @@ namespace Evimiz.ViewModels
         public int? NumberKeyCodeSecondId { get; set; }
         public virtual NumberKeyCodeSecond NumberKeyCodeSecond { get; set; }
 
-        [DataType(DataType.PhoneNumber), StringLength(7, ErrorMessage = "Nömrənin  uzunluğu 7 reqemden artıq ola bilməz")]
+        [DataType(DataType.PhoneNumber,ErrorMessage ="Düzgün nömrə daxil edin"), StringLength(7, ErrorMessage = "Nömrənin  uzunluğu 7 reqemden artıq ola bilməz")]
         public string SecondPhonenumber { get; set; }
 
         [StringLength(100)]
@@ -41,17 +41,17 @@ namespace Evimiz.ViewModels
         [Required(ErrorMessage = "Emailinizi daxil edin"), EmailAddress(ErrorMessage = "Düzgun email daxil edin"), DataType(DataType.EmailAddress, ErrorMessage = "Düzgun email daxil edin")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Nömrə daxil edin"), DataType(DataType.PhoneNumber), StringLength(7, ErrorMessage = "Nömrənin  uzunluğu 7 reqemden artıq ola bilməz")]
+        [Required(ErrorMessage = "Nömrə daxil edin"), DataType(DataType.PhoneNumber, ErrorMessage = "Düzgün nömrə daxil edin"), StringLength(7, ErrorMessage = "Nömrənin  uzunluğu 7 reqemden artıq ola bilməz")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "İstifadəçi adınızı daxil edin"), StringLength(100, ErrorMessage = "İstifadəçi adınız 100 hərfden artıq ola bilməz")]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "İstifadəçi parolunuzu daxil edin"), DataType(DataType.Password)]
+        [Required(ErrorMessage = "İstifadəçi parolunuzu daxil edin"), DataType(DataType.Password, ErrorMessage = "Düzgün şifrə qəbul edin")]
         public string Password { get; set; }
 
-        [Compare(nameof(Password))]
-        [Required(ErrorMessage = "Təsdiq parolunuzu daxil edin"), DataType(DataType.Password)]
+        [Compare(nameof(Password),ErrorMessage ="Təsdiq şifrəniz şifrə ilə eyni olmalıdır")]
+        [Required(ErrorMessage = "Təsdiq parolunuzu daxil edin"), DataType(DataType.Password,ErrorMessage ="Düzgün şifrə qəbul edin")]
         public string ConfirePassword { get; set; }
 
         public bool İsAgent { get; set; }

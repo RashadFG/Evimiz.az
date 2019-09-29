@@ -324,38 +324,18 @@
                 <div class="d-none  under-tabs tab-active" data-id="1">
                     <div class="row ">
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
                                 <option value="">Yeni tikili otaq sayı</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))" >
                                 <option value="">Köhnə tikili otaq sayı</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
+
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
-                                <option value="">Rayonlar</option>
-                                <option value="">Abşeron </option>
-                                <option value="">Binəqədi</option>
-                                <option value="">Nərimanov </option>
-                                <option value="">Nizami</option>
-                                <option value="">Pirallahı</option>
-                                <option value="">Qaradağ</option>
-                                <option value="">Sabunçu</option>
-                                <option value="">Suraxanı</option>
-                                <option value="">Səbail</option>
-                                <option value="">Xətai</option>
-                                <option value="">Xəzər </option>
-                                <option value="">Yasamal</option>
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))">
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
@@ -369,40 +349,19 @@
                 <!-- İcarə -->
                 <div class="d-none under-tabs" data-id="2">
                     <div class="row ">
+
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
-                                <option value="">Yeni tikili otaq sayı</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
+                                <option value="0">Yeni tikili otaq sayı</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
-                                <option value="">Köhnə tikili otaq sayı</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
+                                <option value="0">Köhnə tikili otaq sayı</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control">
-                                <option value="">Rayonlar</option>
-                                <option value="">Abşeron </option>
-                                <option value="">Binəqədi</option>
-                                <option value="">Nərimanov </option>
-                                <option value="">Nizami</option>
-                                <option value="">Pirallahı</option>
-                                <option value="">Qaradağ</option>
-                                <option value="">Sabunçu</option>
-                                <option value="">Suraxanı</option>
-                                <option value="">Səbail</option>
-                                <option value="">Xətai</option>
-                                <option value="">Xəzər </option>
-                                <option value="">Yasamal</option>
-                            </select>
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))"></select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
                             <div class="Btn-first">
@@ -417,42 +376,32 @@
                     <div class="row ">
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="col-12">
-                                <select class="form-control ">
-                                    <option value="">Elanın növü</option>
-                                    <option value="">Satılır</option>
-                                    <option value="">Kirayə aylıq</option>
-                                    <option value="">Kirayə günlük</option>
+                                <select class="form-control "  asp-items="@(new SelectList(ViewBag.ProperyCategories, "Id", "Name"))">
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-control mt-1" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-control mt-1">
+                                    <option value="0">Yeni tikili otaq sayı</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5+</option>
 
                                 </select>
                             </div>
                             <div class="col-12">
                                 <select class="form-control mt-1">
-                                    <option value="">Əmlakın növü</option>
-                                    <option value="">Yeni tikili</option>
-                                    <option value="">Köhnə tikili</option>
-                                    <option value="">Həyət evi</option>
-                                    <option value="">Bağ evi</option>
-                                    <option value="">Ofis</option>
-                                    <option value="">Qaraj</option>
-
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <select class="form-control mt-1">
-                                    <option value="">Yeni tikili otaq sayı</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <select class="form-control mt-1">
-                                    <option value="">Yeni tikili otaq sayı</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
+                                    <option value="0">Yeni tikili otaq sayı</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5+</option>
                                 </select>
                             </div>
                         </div>

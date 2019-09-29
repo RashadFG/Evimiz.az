@@ -46,3 +46,16 @@ C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Hesab\D�
 C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\DüzəlişEt.g.cshtml.cs
 C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Hesab\Seçim.g.cshtml.cs
 C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Hesab\EmailYoxlanışı.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CheckedPartial.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllVip.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllUsual.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllNewPlace.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllOldPlace.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllVilla.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllHouse.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllYardHouse.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllOffice.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllGrarage.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllPlace.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllPropertyObject.g.cshtml.cs
+C:\Users\Fuad\Desktop\Evimiz\Evimiz\obj\Debug\netcoreapp2.1\Razor\Views\Elan\AllPremium.g.cshtml.cs

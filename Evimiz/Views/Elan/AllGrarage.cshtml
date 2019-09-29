@@ -1,0 +1,95 @@
+﻿@*@model  ViewModel
+@{
+    ViewData["Title"] = "AllGrarage";
+}
+
+<!-- Qaraj Advertisement start -->
+<section id="advertisement">
+    <div class="container">
+        <div class="row head">
+            <div class="col-md-8 col-12 ">
+                <i class="fas fa-warehouse mr-2 color-blue"></i> Qaraj
+            </div>
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+                <span class="ml-3 search-category">
+                    Kirayə
+                    <label class="switch">
+                        <input type="checkbox" checked id="checkbox9">
+                        <span class="slider-check round"></span>
+                    </label>
+                    Satilır
+                </span>
+
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Garage">
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 7 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                    <i class="fas fa-heart heart fa-2x d-none"></i>
+                    <i class="far fa-heart heart fa-2x"></i>
+                    <a asp-controller="Elan" asp-action="Haqqında">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                    @if (item.PropertyCategory.Id == 1)
+                                    {
+                                        <div class="Rent">Satış</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="Sell">Kirayə</div>
+                                    }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="about-advertisement">
+                                    <div class="location">
+                                        <div class="col-12 p-0">
+                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                        </div>
+                                    </div>
+                                    <div class="detail">
+                                        <span> @item.Area m<sup>2</sup> </span>
+                                    </div>
+
+                                    <div class="date">
+                                        <span>@item.Region.City.Name,</span>
+                                        <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                    </div>
+                                    @if (item.IsVip == true)
+                                    {
+                                        <i class="fas fa-gem gem"></i>
+                                    }
+                                    else if (item.IsPremium == true)
+                                    {
+                                        <i class="fas fa-crown premium"></i>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="row Advertisement-place justify-content-center">
+            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
+                @if (Model.Advertisements.Where(x => x.CategoryId == 7 && x.IsPremium == false && x.IsVip == false).Count() > 8)
+                {
+                    <a href="#" class="btn Btn-yellow  btn-block">
+                        <i class="fas fa-plus"></i> Daha
+                        çox
+                    </a>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--  Qaraj Advertisement end -->*@

@@ -11,6 +11,7 @@ namespace Evimiz.Models
         public PropertyCategory()
         {
             Orders = new HashSet<Order>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         public int Id { get; set; }
@@ -18,7 +19,7 @@ namespace Evimiz.Models
         [Required, StringLength(100)]
         public string Name { get; set; }
 
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
-
     }
 }

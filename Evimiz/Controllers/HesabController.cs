@@ -227,13 +227,6 @@ namespace Evimiz.Controllers
             return RedirectToAction("DaxilOl", "Hesab");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Çıxış()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("AnaSəhifə", "Evimiz");
-        }
-
         public async Task<IActionResult> EmailYoxlanışı(string id)
         {
             if (id != null)
@@ -248,6 +241,13 @@ namespace Evimiz.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Çıxış()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("AnaSəhifə", "Evimiz");
         }
 
         [HttpGet]

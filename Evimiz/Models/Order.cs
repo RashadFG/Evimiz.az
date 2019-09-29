@@ -19,7 +19,7 @@ namespace Evimiz.Models
         [Required(ErrorMessage = "Sifariş başlığını əlavə edin"), StringLength(200, ErrorMessage = "Sifariş haqqında 200 hərfdən artiq ola bilməz")]
         public string Info { get; set; }
 
-        public int? NumberKeyCodeId { get; set; }
+        public int NumberKeyCodeId { get; set; }
         public virtual NumberKeyCode NumberKeyCode { get; set; }
 
         public int? NumberKeyCodeSecondId { get; set; }
@@ -33,5 +33,8 @@ namespace Evimiz.Models
 
         public int PropertyCategoryId { get; set; }
         public virtual PropertyCategory PropertyCategory { get; set; }
+
+        public int? RentId { get; set; }
+        public virtual Rent Rent { get; set; }
     }
 }

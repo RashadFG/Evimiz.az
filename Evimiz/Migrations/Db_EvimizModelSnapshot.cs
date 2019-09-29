@@ -27,7 +27,7 @@ namespace Evimiz.Migrations
 
                     b.Property<string>("About")
                         .IsRequired()
-                        .HasMaxLength(200);
+                        .HasMaxLength(1000);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -37,13 +37,12 @@ namespace Evimiz.Migrations
 
                     b.Property<int>("CategoryId");
 
+                    b.Property<int>("CityId");
+
                     b.Property<string>("FirstPhoneNumber")
                         .HasMaxLength(7);
 
-                    b.Property<int>("HomeId");
-
-                    b.Property<string>("ImageUrl")
-                        .HasMaxLength(100);
+                    b.Property<int?>("FloorId");
 
                     b.Property<bool>("IsConfirmed");
 
@@ -57,9 +56,7 @@ namespace Evimiz.Migrations
 
                     b.Property<int?>("MetroId");
 
-                    b.Property<int?>("MetronId");
-
-                    b.Property<int?>("NumberKeyCodeId");
+                    b.Property<int>("NumberKeyCodeId");
 
                     b.Property<int?>("NumberKeyCodeSecondId");
 
@@ -73,9 +70,13 @@ namespace Evimiz.Migrations
 
                     b.Property<DateTime>("PublishDate");
 
-                    b.Property<int>("RegionId");
+                    b.Property<int?>("RankId");
+
+                    b.Property<int?>("RegionId");
 
                     b.Property<int?>("RentId");
+
+                    b.Property<int?>("RoomId");
 
                     b.Property<string>("SecondPhoneNumber")
                         .HasMaxLength(7);
@@ -88,7 +89,9 @@ namespace Evimiz.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("HomeId");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("FloorId");
 
                     b.HasIndex("MetroId");
 
@@ -102,9 +105,13 @@ namespace Evimiz.Migrations
 
                     b.HasIndex("PropertyRepairId");
 
+                    b.HasIndex("RankId");
+
                     b.HasIndex("RegionId");
 
                     b.HasIndex("RentId");
+
+                    b.HasIndex("RoomId");
 
                     b.HasIndex("VillageId");
 
@@ -217,62 +224,60 @@ namespace Evimiz.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.Home", b =>
+            modelBuilder.Entity("Evimiz.Models.Floor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("HouseId");
-
-                    b.Property<int?>("NewPlaceId");
-
-                    b.Property<int?>("OfficeId");
-
-                    b.Property<int?>("OldPlaceId");
-
-                    b.Property<int?>("PropertyObjectId");
-
-                    b.Property<int?>("VillaId");
-
-                    b.Property<int?>("VillageId");
-
-                    b.Property<int?>("YardHouseId");
+                    b.Property<int>("Count")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseId");
+                    b.ToTable("Floors");
 
-                    b.HasIndex("NewPlaceId");
-
-                    b.HasIndex("OfficeId");
-
-                    b.HasIndex("OldPlaceId");
-
-                    b.HasIndex("PropertyObjectId");
-
-                    b.HasIndex("VillaId");
-
-                    b.HasIndex("VillageId");
-
-                    b.HasIndex("YardHouseId");
-
-                    b.ToTable("Homes");
-                });
-
-            modelBuilder.Entity("Evimiz.Models.House", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Houses");
+                    b.HasData(
+                        new { Id = 1, Count = 1 },
+                        new { Id = 2, Count = 2 },
+                        new { Id = 3, Count = 3 },
+                        new { Id = 4, Count = 4 },
+                        new { Id = 5, Count = 5 },
+                        new { Id = 6, Count = 6 },
+                        new { Id = 7, Count = 7 },
+                        new { Id = 8, Count = 8 },
+                        new { Id = 9, Count = 9 },
+                        new { Id = 10, Count = 10 },
+                        new { Id = 11, Count = 11 },
+                        new { Id = 12, Count = 12 },
+                        new { Id = 13, Count = 13 },
+                        new { Id = 14, Count = 14 },
+                        new { Id = 15, Count = 15 },
+                        new { Id = 16, Count = 16 },
+                        new { Id = 17, Count = 17 },
+                        new { Id = 18, Count = 18 },
+                        new { Id = 19, Count = 19 },
+                        new { Id = 20, Count = 20 },
+                        new { Id = 21, Count = 21 },
+                        new { Id = 22, Count = 22 },
+                        new { Id = 23, Count = 23 },
+                        new { Id = 24, Count = 24 },
+                        new { Id = 25, Count = 25 },
+                        new { Id = 26, Count = 26 },
+                        new { Id = 27, Count = 27 },
+                        new { Id = 28, Count = 29 },
+                        new { Id = 30, Count = 30 },
+                        new { Id = 31, Count = 31 },
+                        new { Id = 32, Count = 32 },
+                        new { Id = 33, Count = 33 },
+                        new { Id = 34, Count = 34 },
+                        new { Id = 35, Count = 35 },
+                        new { Id = 36, Count = 36 },
+                        new { Id = 37, Count = 37 },
+                        new { Id = 38, Count = 38 },
+                        new { Id = 39, Count = 39 },
+                        new { Id = 40, Count = 40 }
+                    );
                 });
 
             modelBuilder.Entity("Evimiz.Models.Image", b =>
@@ -282,6 +287,8 @@ namespace Evimiz.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AdvertisementId");
+
+                    b.Property<bool>("IsMainPhoto");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100);
@@ -331,7 +338,7 @@ namespace Evimiz.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("NumberKeyCodeId");
+                    b.Property<int>("NumberKeyCodeId");
 
                     b.Property<int?>("NumberKeyCodeSecondId");
 
@@ -422,23 +429,6 @@ namespace Evimiz.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.NewPlace", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("FloorCount");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NewPlaceS");
-                });
-
             modelBuilder.Entity("Evimiz.Models.News", b =>
                 {
                     b.Property<int>("Id")
@@ -517,40 +507,6 @@ namespace Evimiz.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.Office", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("FloorCount");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OfficeS");
-                });
-
-            modelBuilder.Entity("Evimiz.Models.OldPlace", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("FloorCount");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OldPlaceS");
-                });
-
             modelBuilder.Entity("Evimiz.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -571,11 +527,13 @@ namespace Evimiz.Migrations
                     b.Property<string>("LastNumber")
                         .HasMaxLength(7);
 
-                    b.Property<int?>("NumberKeyCodeId");
+                    b.Property<int>("NumberKeyCodeId");
 
                     b.Property<int?>("NumberKeyCodeSecondId");
 
                     b.Property<int>("PropertyCategoryId");
+
+                    b.Property<int?>("RentId");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -588,6 +546,8 @@ namespace Evimiz.Migrations
                     b.HasIndex("NumberKeyCodeSecondId");
 
                     b.HasIndex("PropertyCategoryId");
+
+                    b.HasIndex("RentId");
 
                     b.ToTable("Orders");
                 });
@@ -637,21 +597,6 @@ namespace Evimiz.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.PropertyObject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PropertyObject");
-                });
-
             modelBuilder.Entity("Evimiz.Models.PropertyRepair", b =>
                 {
                     b.Property<int>("Id")
@@ -673,6 +618,62 @@ namespace Evimiz.Migrations
                         new { Id = 4, Name = "Orta təmirli" },
                         new { Id = 5, Name = "Yaxşı təmirli" },
                         new { Id = 6, Name = "Əla təmirli" }
+                    );
+                });
+
+            modelBuilder.Entity("Evimiz.Models.Rank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ranks");
+
+                    b.HasData(
+                        new { Id = 1, Count = 1 },
+                        new { Id = 2, Count = 2 },
+                        new { Id = 3, Count = 3 },
+                        new { Id = 4, Count = 4 },
+                        new { Id = 5, Count = 5 },
+                        new { Id = 6, Count = 6 },
+                        new { Id = 7, Count = 7 },
+                        new { Id = 8, Count = 8 },
+                        new { Id = 9, Count = 9 },
+                        new { Id = 10, Count = 10 },
+                        new { Id = 11, Count = 11 },
+                        new { Id = 12, Count = 12 },
+                        new { Id = 13, Count = 13 },
+                        new { Id = 14, Count = 14 },
+                        new { Id = 15, Count = 15 },
+                        new { Id = 16, Count = 16 },
+                        new { Id = 17, Count = 17 },
+                        new { Id = 18, Count = 18 },
+                        new { Id = 19, Count = 19 },
+                        new { Id = 20, Count = 20 },
+                        new { Id = 21, Count = 21 },
+                        new { Id = 22, Count = 22 },
+                        new { Id = 23, Count = 23 },
+                        new { Id = 24, Count = 24 },
+                        new { Id = 25, Count = 25 },
+                        new { Id = 26, Count = 26 },
+                        new { Id = 27, Count = 27 },
+                        new { Id = 28, Count = 29 },
+                        new { Id = 30, Count = 30 },
+                        new { Id = 31, Count = 31 },
+                        new { Id = 32, Count = 32 },
+                        new { Id = 33, Count = 33 },
+                        new { Id = 34, Count = 34 },
+                        new { Id = 35, Count = 35 },
+                        new { Id = 36, Count = 36 },
+                        new { Id = 37, Count = 37 },
+                        new { Id = 38, Count = 38 },
+                        new { Id = 39, Count = 39 },
+                        new { Id = 40, Count = 40 }
                     );
                 });
 
@@ -721,33 +722,38 @@ namespace Evimiz.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<int>("PropertyCategoryId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PropertyCategoryId");
 
                     b.ToTable("Rents");
 
                     b.HasData(
-                        new { Id = 1, Name = "Aylıq", PropertyCategoryId = 2 },
-                        new { Id = 2, Name = "Günluk", PropertyCategoryId = 2 }
+                        new { Id = 1, Name = "Aylıq" },
+                        new { Id = 2, Name = "Günluk" }
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.Villa", b =>
+            modelBuilder.Entity("Evimiz.Models.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("RoomCount");
+                    b.Property<string>("Count")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.ToTable("VillaS");
+                    b.ToTable("Room");
+
+                    b.HasData(
+                        new { Id = 1, Count = "1" },
+                        new { Id = 2, Count = "2" },
+                        new { Id = 3, Count = "3" },
+                        new { Id = 4, Count = "4" },
+                        new { Id = 5, Count = "5" },
+                        new { Id = 6, Count = "5+" }
+                    );
                 });
 
             modelBuilder.Entity("Evimiz.Models.Village", b =>
@@ -867,21 +873,6 @@ namespace Evimiz.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Evimiz.Models.YardHouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Floor");
-
-                    b.Property<int>("RoomCount");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("YardHouseS");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -995,29 +986,34 @@ namespace Evimiz.Migrations
             modelBuilder.Entity("Evimiz.Models.Advertisement", b =>
                 {
                     b.HasOne("Evimiz.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Advertisements")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Evimiz.Models.Home", "Home")
+                    b.HasOne("Evimiz.Models.City", "City")
                         .WithMany("Advertisements")
-                        .HasForeignKey("HomeId")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Evimiz.Models.Floor", "Floor")
+                        .WithMany("Advertisements")
+                        .HasForeignKey("FloorId");
+
                     b.HasOne("Evimiz.Models.Metro", "Metro")
-                        .WithMany()
+                        .WithMany("Advertisements")
                         .HasForeignKey("MetroId");
 
                     b.HasOne("Evimiz.Models.NumberKeyCode", "NumberKeyCode")
-                        .WithMany()
-                        .HasForeignKey("NumberKeyCodeId");
+                        .WithMany("Advertisements")
+                        .HasForeignKey("NumberKeyCodeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Evimiz.Models.NumberKeyCodeSecond", "NumberKeyCodeSecond")
-                        .WithMany()
+                        .WithMany("Advertisements")
                         .HasForeignKey("NumberKeyCodeSecondId");
 
                     b.HasOne("Evimiz.Models.PropertyCategory", "PropertyCategory")
-                        .WithMany()
+                        .WithMany("Advertisements")
                         .HasForeignKey("PropertyCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -1031,57 +1027,29 @@ namespace Evimiz.Migrations
                         .HasForeignKey("PropertyRepairId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Evimiz.Models.Rank", "Rank")
+                        .WithMany("Advertisements")
+                        .HasForeignKey("RankId");
+
                     b.HasOne("Evimiz.Models.Region", "Region")
                         .WithMany("Advertisement")
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RegionId");
 
-                    b.HasOne("Evimiz.Models.Rent")
+                    b.HasOne("Evimiz.Models.Rent", "Rent")
                         .WithMany("Advertisements")
                         .HasForeignKey("RentId");
 
+                    b.HasOne("Evimiz.Models.Room", "Room")
+                        .WithMany("Advertisements")
+                        .HasForeignKey("RoomId");
+
                     b.HasOne("Evimiz.Models.Village", "Village")
-                        .WithMany()
+                        .WithMany("Advertisements")
                         .HasForeignKey("VillageId");
 
                     b.HasOne("Evimiz.Models.İstifadəçi", "User")
                         .WithMany("Advertisements")
                         .HasForeignKey("İstifadəçiId");
-                });
-
-            modelBuilder.Entity("Evimiz.Models.Home", b =>
-                {
-                    b.HasOne("Evimiz.Models.House", "House")
-                        .WithMany()
-                        .HasForeignKey("HouseId");
-
-                    b.HasOne("Evimiz.Models.NewPlace", "NewPlace")
-                        .WithMany("Homes")
-                        .HasForeignKey("NewPlaceId");
-
-                    b.HasOne("Evimiz.Models.Office", "Office")
-                        .WithMany("Homes")
-                        .HasForeignKey("OfficeId");
-
-                    b.HasOne("Evimiz.Models.OldPlace", "OldPlace")
-                        .WithMany("Homes")
-                        .HasForeignKey("OldPlaceId");
-
-                    b.HasOne("Evimiz.Models.PropertyObject", "PropertyObject")
-                        .WithMany()
-                        .HasForeignKey("PropertyObjectId");
-
-                    b.HasOne("Evimiz.Models.Villa", "Villa")
-                        .WithMany("Homes")
-                        .HasForeignKey("VillaId");
-
-                    b.HasOne("Evimiz.Models.Village")
-                        .WithMany("Homes")
-                        .HasForeignKey("VillageId");
-
-                    b.HasOne("Evimiz.Models.YardHouse", "YardHouse")
-                        .WithMany("Homes")
-                        .HasForeignKey("YardHouseId");
                 });
 
             modelBuilder.Entity("Evimiz.Models.Image", b =>
@@ -1096,7 +1064,8 @@ namespace Evimiz.Migrations
                 {
                     b.HasOne("Evimiz.Models.NumberKeyCode", "NumberKeyCode")
                         .WithMany()
-                        .HasForeignKey("NumberKeyCodeId");
+                        .HasForeignKey("NumberKeyCodeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Evimiz.Models.NumberKeyCodeSecond", "NumberKeyCodeSecond")
                         .WithMany()
@@ -1111,7 +1080,8 @@ namespace Evimiz.Migrations
                 {
                     b.HasOne("Evimiz.Models.NumberKeyCode", "NumberKeyCode")
                         .WithMany()
-                        .HasForeignKey("NumberKeyCodeId");
+                        .HasForeignKey("NumberKeyCodeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Evimiz.Models.NumberKeyCodeSecond", "NumberKeyCodeSecond")
                         .WithMany()
@@ -1121,21 +1091,17 @@ namespace Evimiz.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("PropertyCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Evimiz.Models.Rent", "Rent")
+                        .WithMany("Orders")
+                        .HasForeignKey("RentId");
                 });
 
             modelBuilder.Entity("Evimiz.Models.Region", b =>
                 {
                     b.HasOne("Evimiz.Models.City", "City")
-                        .WithMany("Regions")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Evimiz.Models.Rent", b =>
-                {
-                    b.HasOne("Evimiz.Models.PropertyCategory", "PropertyCategory")
                         .WithMany()
-                        .HasForeignKey("PropertyCategoryId")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

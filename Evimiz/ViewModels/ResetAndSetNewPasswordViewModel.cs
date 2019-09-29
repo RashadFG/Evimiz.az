@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Evimiz.ViewModels
 {
     public class ResetAndSetNewPasswordViewModel
     {
-        [Required(ErrorMessage = "Zəhmət olmasa, boşluğu doldurun"), DataType(DataType.Password)]
+        [Required(ErrorMessage = "İstifadəçi parolunuzu daxil edin"), DataType(DataType.Password, ErrorMessage = "Düzgün şifrə qəbul edin")]
         public string NewPassword { get; set; }
-        [Required(ErrorMessage = "Zəhmət olmasa, boşluğu doldurun"), DataType(DataType.Password), Compare("NewPassword", ErrorMessage = "Daxil etdiyiniz şifrə ilə uyğun gəlmir")]
+
+        [Required(ErrorMessage = "İstifadəçi parolunuzu daxil edin"), DataType(DataType.Password, ErrorMessage = "Düzgün şifrə qəbul edin"), Compare("NewPassword", ErrorMessage = "Daxil etdiyiniz şifrə ilə uyğun gəlmir")]
         public string ConfirmNewPassword { get; set; }
+
         public string UserId { get; set; }
         public string PasswordResetToken { get; set; }
     }

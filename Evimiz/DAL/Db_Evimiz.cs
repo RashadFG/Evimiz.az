@@ -13,27 +13,21 @@ namespace Evimiz.DAL
         public DbSet<Advertisement> Advertisements { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Home> Homes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Metro> Metros { get; set; }
-        public DbSet<NewPlace> NewPlaceS { get; set; }
         public DbSet<News> Newss { get; set; }
         public DbSet<NumberKeyCode> NumberKeyCodes { get; set; }
         public DbSet<NumberKeyCodeSecond> NumberKeyCodeSecondS { get; set; }
-        public DbSet<Office> OfficeS { get; set; }
-        public DbSet<OldPlace> OldPlaceS { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<PropertyCategory> PropertyCategorys { get; set; }
         public DbSet<PropertyDocument> PropertyDocuments { get; set; }
         public DbSet<PropertyRepair> PropertyRepairs { get; set; }
-        public DbSet<PropertyObject> PropertyObject { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Rent> Rents { get; set; }
         public DbSet<Village> Villages { get; set; }
-        public DbSet<House> Houses { get; set; }
-        public DbSet<Villa> VillaS { get; set; }
-        public DbSet<YardHouse> YardHouseS { get; set; }
-
+        public DbSet<Floor> Floors { get; set; }
+        public DbSet<Room> Room { get; set; }
+        public DbSet<Rank> Ranks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,8 +56,8 @@ namespace Evimiz.DAL
                 );
 
             builder.Entity(typeof(Rent)).HasData(
-               new Rent { Id = 1, Name = "Aylıq", PropertyCategoryId = 2 },
-               new Rent { Id = 2, Name = "Günluk", PropertyCategoryId = 2 }
+               new Rent { Id = 1, Name = "Aylıq" },
+               new Rent { Id = 2, Name = "Günluk" }
                 );
 
             builder.Entity(typeof(PropertyRepair)).HasData(
@@ -74,7 +68,7 @@ namespace Evimiz.DAL
                new PropertyRepair { Id = 5, Name = "Yaxşı təmirli" },
                new PropertyRepair { Id = 6, Name = "Əla təmirli" }
                );
-            
+
             builder.Entity(typeof(PropertyDocument)).HasData(
                new PropertyDocument { Id = 1, Name = "Müqavilə" },
                new PropertyDocument { Id = 2, Name = "Sərəncam" },
@@ -85,6 +79,99 @@ namespace Evimiz.DAL
                new PropertyDocument { Id = 7, Name = "Digər sənəd" }
                );
 
+            builder.Entity(typeof(Room)).HasData(
+                new Room { Id = 1, Count = "1" },
+                new Room { Id = 2, Count = "2" },
+                new Room { Id = 3, Count = "3" },
+                new Room { Id = 4, Count = "4" },
+                new Room { Id = 5, Count = "5" },
+                new Room { Id = 6, Count = "5+" }
+                );
+
+            builder.Entity(typeof(Floor)).HasData(
+               new Floor { Id = 1, Count = 1 },
+               new Floor { Id = 2, Count = 2 },
+               new Floor { Id = 3, Count = 3 },
+               new Floor { Id = 4, Count = 4 },
+               new Floor { Id = 5, Count = 5 },
+               new Floor { Id = 6, Count = 6 },
+               new Floor { Id = 7, Count = 7 },
+               new Floor { Id = 8, Count = 8 },
+               new Floor { Id = 9, Count = 9 },
+               new Floor { Id = 10, Count = 10 },
+               new Floor { Id = 11, Count = 11 },
+               new Floor { Id = 12, Count = 12 },
+               new Floor { Id = 13, Count = 13 },
+               new Floor { Id = 14, Count = 14 },
+               new Floor { Id = 15, Count = 15 },
+               new Floor { Id = 16, Count = 16 },
+               new Floor { Id = 17, Count = 17 },
+               new Floor { Id = 18, Count = 18 },
+               new Floor { Id = 19, Count = 19 },
+               new Floor { Id = 20, Count = 20 },
+               new Floor { Id = 21, Count = 21 },
+               new Floor { Id = 22, Count = 22 },
+               new Floor { Id = 23, Count = 23 },
+               new Floor { Id = 24, Count = 24 },
+               new Floor { Id = 25, Count = 25 },
+               new Floor { Id = 26, Count = 26 },
+               new Floor { Id = 27, Count = 27 },
+               new Floor { Id = 28, Count = 29 },
+               new Floor { Id = 30, Count = 30 },
+               new Floor { Id = 31, Count = 31 },
+               new Floor { Id = 32, Count = 32 },
+               new Floor { Id = 33, Count = 33 },
+               new Floor { Id = 34, Count = 34 },
+               new Floor { Id = 35, Count = 35 },
+               new Floor { Id = 36, Count = 36 },
+               new Floor { Id = 37, Count = 37 },
+               new Floor { Id = 38, Count = 38 },
+               new Floor { Id = 39, Count = 39 },
+               new Floor { Id = 40, Count = 40 }
+               );
+
+
+            builder.Entity(typeof(Rank)).HasData(
+               new Rank { Id = 1, Count = 1 },
+               new Rank { Id = 2, Count = 2 },
+               new Rank { Id = 3, Count = 3 },
+               new Rank { Id = 4, Count = 4 },
+               new Rank { Id = 5, Count = 5 },
+               new Rank { Id = 6, Count = 6 },
+               new Rank { Id = 7, Count = 7 },
+               new Rank { Id = 8, Count = 8 },
+               new Rank { Id = 9, Count = 9 },
+               new Rank { Id = 10, Count = 10 },
+               new Rank { Id = 11, Count = 11 },
+               new Rank { Id = 12, Count = 12 },
+               new Rank { Id = 13, Count = 13 },
+               new Rank { Id = 14, Count = 14 },
+               new Rank { Id = 15, Count = 15 },
+               new Rank { Id = 16, Count = 16 },
+               new Rank { Id = 17, Count = 17 },
+               new Rank { Id = 18, Count = 18 },
+               new Rank { Id = 19, Count = 19 },
+               new Rank { Id = 20, Count = 20 },
+               new Rank { Id = 21, Count = 21 },
+               new Rank { Id = 22, Count = 22 },
+               new Rank { Id = 23, Count = 23 },
+               new Rank { Id = 24, Count = 24 },
+               new Rank { Id = 25, Count = 25 },
+               new Rank { Id = 26, Count = 26 },
+               new Rank { Id = 27, Count = 27 },
+               new Rank { Id = 28, Count = 29 },
+               new Rank { Id = 30, Count = 30 },
+               new Rank { Id = 31, Count = 31 },
+               new Rank { Id = 32, Count = 32 },
+               new Rank { Id = 33, Count = 33 },
+               new Rank { Id = 34, Count = 34 },
+               new Rank { Id = 35, Count = 35 },
+               new Rank { Id = 36, Count = 36 },
+               new Rank { Id = 37, Count = 37 },
+               new Rank { Id = 38, Count = 38 },
+               new Rank { Id = 39, Count = 39 },
+               new Rank { Id = 40, Count = 40 }
+               );
             builder.Entity(typeof(City)).HasData(
                 new City { Id = 1, Name = "Abşeron" },
                 new City { Id = 2, Name = "Ağcabədi" },
@@ -164,11 +251,11 @@ namespace Evimiz.DAL
                  );
 
             builder.Entity(typeof(Village)).HasData(
-            new Village { Id = 1, Name = "1mkr"},
+            new Village { Id = 1, Name = "1mkr" },
             new Village { Id = 2, Name = "2mkr" },
             new Village { Id = 3, Name = "20-ci sahə" },
             new Village { Id = 4, Name = "28 May" },
-            new Village { Id = 5, Name = "3mkr"},
+            new Village { Id = 5, Name = "3mkr" },
             new Village { Id = 6, Name = "4mkr" },
             new Village { Id = 7, Name = "5mkr" },
             new Village { Id = 8, Name = "6mkr" },
@@ -293,7 +380,7 @@ namespace Evimiz.DAL
                );
 
             builder.Entity(typeof(NumberKeyCode)).HasData(
-               new NumberKeyCode { Id = 1, Kcode ="050"  },
+               new NumberKeyCode { Id = 1, Kcode = "050" },
                new NumberKeyCode { Id = 2, Kcode = "051" },
                new NumberKeyCode { Id = 3, Kcode = "055" },
                new NumberKeyCode { Id = 4, Kcode = "070" },
@@ -304,7 +391,7 @@ namespace Evimiz.DAL
                 );
 
             builder.Entity(typeof(NumberKeyCodeSecond)).HasData(
-               new NumberKeyCodeSecond { Id = 1, Kcode ="050"  },
+               new NumberKeyCodeSecond { Id = 1, Kcode = "050" },
                new NumberKeyCodeSecond { Id = 2, Kcode = "051" },
                new NumberKeyCodeSecond { Id = 3, Kcode = "055" },
                new NumberKeyCodeSecond { Id = 4, Kcode = "070" },

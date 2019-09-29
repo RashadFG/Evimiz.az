@@ -4,6 +4,7 @@ using Evimiz.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace Evimiz.Controllers
     public class EvimizController : Controller
     {
         private readonly Db_Evimiz _context;
+        private readonly SignInManager<İstifadəçi> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IHostingEnvironment _env;
         private readonly UserManager<İstifadəçi> _userManager;
@@ -19,19 +21,19 @@ namespace Evimiz.Controllers
         public EvimizController(Db_Evimiz context,
                               RoleManager<IdentityRole> roleManager,
                               IHostingEnvironment env,
-                              UserManager<İstifadəçi> userManager
+                              UserManager<İstifadəçi> userManager,
+                               SignInManager<İstifadəçi> signInManager
                               )
         {
             _context = context;
             _roleManager = roleManager;
             _env = env;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> AnaSəhifə()
         {
-            ViewBag.Home = "Home";
-
             #region CreateRole:)
             //if (!await _roleManager.RoleExistsAsync("Admin"))
             //{
@@ -54,8 +56,20 @@ namespace Evimiz.Controllers
             //}
             #endregion
 
-            return View();
+            ViewBag.Home = "Home";
+            ViewBag.Regions = _context.Regions.ToList();
+            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.ProperyCategories = _context.PropertyCategorys.ToList();
+            ViewBag.Rooms = _context.Room.ToList();
 
+            ViewModel model = new ViewModel()
+            {
+                Advertisements = _context.Advertisements.ToList(),
+                Images = _context.Images.ToList(),
+                Users = _context.Users.ToList(),
+            };
+
+            return View(model);
         }
 
         [ActionName("Xəbərlər")]

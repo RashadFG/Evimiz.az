@@ -23,7 +23,7 @@ namespace Evimiz.Models
         [DataType(DataType.DateTime)]
         public DateTime RegisterDate { get; set; }
 
-        public int? NumberKeyCodeId { get; set; }
+        public int NumberKeyCodeId { get; set; }
         public virtual NumberKeyCode NumberKeyCode { get; set; }
 
         public int? NumberKeyCodeSecondId { get; set; }

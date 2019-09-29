@@ -11,16 +11,15 @@ namespace Evimiz.Models
         public Rent()
         {
             Advertisements = new HashSet<Advertisement>();
+            Orders = new HashSet<Order>();
         }
         public int Id { get; set; }
 
         [Required, StringLength(100)]
         public string Name { get; set; }
 
-        public int PropertyCategoryId { get; set; }
-        public virtual PropertyCategory PropertyCategory { get; set; }
-
         public virtual ICollection<Advertisement> Advertisements { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
     }
 }

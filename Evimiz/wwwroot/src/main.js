@@ -222,28 +222,29 @@ $(".add-phoneNumber").click(function(){
      })
 })
 
-$(".category").change(function(){
-   var id= $("option:selected", this).attr("data-id");
-        if(id==3 || id==4 || id==5 ||  id==9){
+ $(".category").change(function () {
+        var id = $("option:selected", this).val();
+        if (id == 3 || id == 4 || id == 5 || id == 9) {
             $(".floor").removeClass("d-none")
             $(".Room-count").removeClass("d-none")
             $(".floor-count").removeClass("d-none")
-               $(".floor").addClass("d-none")
+            $(".floor").addClass("d-none")
         }
-        else if(id==1 || id==2 || id==6 ){
+        else if (id == 1 || id == 2 || id == 6) {
             $(".floor").removeClass("d-none")
             $(".Room-count").removeClass("d-none")
             $(".floor-count").removeClass("d-none")
             $(".floor").removeClass("d-none")
-        }else{
+        } else {
             $(".floor").addClass("d-none")
             $(".Room-count").addClass("d-none")
             $(".floor-count").addClass("d-none")
         }
-})
+    })
+
 
 $(".annouce-type").change(function(){
-  var id= $("option:selected", this).attr("data-id");
+  var id= $("option:selected", this).val();
   if(id==2){
       $(".under-annouce-type").removeClass("d-none")
   }else{
@@ -444,20 +445,6 @@ $(document).on("click",".close-img-agent",function(e){
 });
 // Upload photo for agents end-------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //$(document).on("ready", , function () {
     //    console.log($(this))
     //})
@@ -560,3 +547,215 @@ $(".plus-order").click(function(){
 //        e.previousElementSibling.classList.add("d-none");
 //    }
 //})
+//all ajax 
+
+$(document).ready(function () {
+    $("#checkbox").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+            $.ajax({
+                url: "/Ajax/Premium?IsChecked=" + IsChecked,
+                type: "GET",
+                success: function (res) {
+                    if (res == "false") {
+                        alert("Xəta baş verdi!!!")
+                        return
+                    }
+                    $(".Premium").html() == "";
+                    $(".Premium").html(res);
+                }
+            });
+     
+    });
+});
+$(document).ready(function () {
+    $("#checkbox1").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/VIP?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".VIP").html() == "";
+                $(".VIP").html(res);
+            }
+        });
+
+    });
+});
+$(document).ready(function () {
+    $("#checkbox2").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        console.log("asas");
+        $.ajax({
+            url: "/Ajax/Usual?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".Usual").html() == "";
+                $(".Usual").html(res);
+            }
+        });
+
+    });
+});
+$(document).ready(function () {
+    $("#checkbox3").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        console.log("asas");
+        $.ajax({
+            url: "/Ajax/NewPlace?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".NewPlace").html() == "";
+                $(".NewPlace").html(res);
+            }
+        });
+
+    });
+});
+$(document).ready(function () {
+    $("#checkbox4").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/OldPlace?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".OldPlace").html() == "";
+                $(".OldPlace").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox5").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/Villa?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".Villa").html() == "";
+                $(".Villa").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox6").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/House?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".House").html() == "";
+                $(".House").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox7").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/YasrHouse?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".YasrHouse").html() == "";
+                $(".YasrHouse").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox8").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/Office?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".Office").html() == "";
+                $(".Office").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox9").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/Garage?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".Garage").html() == "";
+                $(".Garage").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox10").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/Place?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".Place").html() == "";
+                $(".Place").html(res);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#checkbox11").click(function () {
+        var IsChecked = $(this).first("input").prop("checked");
+        $.ajax({
+            url: "/Ajax/PropertyOnject?IsChecked=" + IsChecked,
+            type: "GET",
+            success: function (res) {
+                if (res == "false") {
+                    alert("Xəta baş verdi!!!")
+                    return
+                }
+                $(".PropertyOnject").html() == "";
+                $(".PropertyOnject").html(res);
+            }
+        });
+    });
+});

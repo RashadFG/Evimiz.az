@@ -1,0 +1,120 @@
+﻿@model ViewModel
+
+@foreach (var item in Model.Advertisements)
+{
+    <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+        <i class="fas fa-heart heart fa-2x d-none"></i>
+        <i class="far fa-heart heart fa-2x"></i>
+        <a asp-controller="Elan" asp-action="Haqqında">
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="img">
+                        <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                        @if (item.PropertyCategory.Id == 1)
+                        {
+                            <div class="Rent">Kirayə</div>
+                        }
+                        else
+                        {
+                            <div class="Sell">Satış</div>
+                        }
+                        <div class="Price">@item.Price Azn</div>
+                        @if (item.PropertyDocument.Id == 6)
+                        {
+                            <i class="fas fa-file-signature document fa-1x"></i>
+                        }
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="about-advertisement">
+                        <div class="location">
+                            <div class="col-12 p-0">
+                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                            </div>
+                        </div>
+                        @if (item.CategoryId == 1)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 2)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 4)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 3)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 5)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 6)
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 7)
+                        {
+                            <div class="detail">
+                                <span> @item.Area m<sup>2</sup> </span>
+                            </div>
+                        }
+                        else if (item.CategoryId == 8)
+                        {
+                            <div class="detail">
+                                <span> @item.Area sot </span> |
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="detail">
+                                <span>@item.Room.Count otaqlı </span> |
+                                <span> @item.Area m<sup>2</sup> </span> |
+                                <span> @item.Floor.Count/@item.Rank.Count m</span>
+                            </div>
+                        }
+                        <div class="date">
+                            <span>@item.City.Name,</span>
+                            <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                        </div>
+                        @if (item.IsVip == true)
+                        {
+                            <i class="fas fa-gem gem"></i>
+                        }
+                        else if (item.IsPremium == true)
+                        {
+                            <i class="fas fa-crown premium"></i>
+                        }
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}
