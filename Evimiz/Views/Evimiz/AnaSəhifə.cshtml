@@ -4,6 +4,13 @@
     ViewData["Title"] = "AnaSəhifə";
 }
 
+<section id="advertisement">
+    <div class="container">
+        <div class="row Advertisement-place justify-content-center search-div-area">
+        </div>
+    </div>
+</section>
+
 <!-- Premium Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -27,23 +34,24 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Premium">
-            @foreach (var item in Model.Advertisements.Where(x => x.IsPremium == true && x.PropertyCategoryId == 1))
+            @foreach (var item in Model.Advertisements.OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -56,7 +64,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     @if (item.CategoryId == 1)
@@ -146,21 +161,10 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-                <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                    @if (Model.Advertisements.Where(x => x.IsPremium == true).Count() > 8)
-                    {
-                        <a href="#" class="btn Btn-yellow  btn-block">
-                            <i class="fas fa-plus"></i> Daha
-                            çox
-                        </a>
-                    }
-                </div>
-            </div>
-        </div>
+
+    </div>
 </section>
 <!-- Premium Advertisement end -->
-
 <!-- Vip Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -183,23 +187,24 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center VIP">
-            @foreach (var item in Model.Advertisements.Where(x => x.IsVip == true && x.PropertyCategoryId==1))
+            @foreach (var item in Model.Advertisements.Where(x => x.IsVip == true && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -212,7 +217,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     @if (item.CategoryId == 1)
@@ -302,22 +314,11 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.IsVip == true).Count() >8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
 
     </div>
-    </section>
+</section>
 <!-- Vip Advertisement end -->
-
 <!-- Agent start -->
 <section id="Agent">
     <div class="container">
@@ -331,9 +332,9 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center">
-            @foreach (var item in Model.Users.Where(x=>x.İsAgent==true))
+            @foreach (var item in Model.Users.Where(x => x.İsAgent == true).OrderByDescending(x => x.RegisterDate).Take(8))
             {
-                <a asp-controller="Əmlakçılar" asp-action="Profilim" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                <a asp-controller="Əmlakçılar" asp-action="Profilim"  asp-route-id="@item.Id" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <div class="row">
                         <div class="col-12 ">
                             <div class="img">
@@ -357,21 +358,9 @@
                 </a>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
     </div>
 </section>
-<!-- Agent end --> 
-
+<!-- Agent end -->
 <!-- last Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -394,23 +383,24 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Usual">
-            @foreach (var item in Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1))
+            @foreach (var item in Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -423,7 +413,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     @if (item.CategoryId == 1)
@@ -513,21 +510,9 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip==false).Count() >8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
     </div>
 </section>
 <!-- last Advertisement end -->
-
 <!-- Yeni tikili Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -550,12 +535,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center NewPlace">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 1 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 1 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -563,6 +548,7 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
@@ -579,7 +565,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -606,22 +599,11 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId==1 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
-                }
-            </div>
-        </div>
+
 
     </div>
 </section>
 <!-- Yeni tikili Advertisement end -->
-
 <!-- Köhnə tikili Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -644,12 +626,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center OldPlace">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 2 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId==1))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 2 && x.IsPremium == false && x.IsVip == false && x.PropertyCategoryId == 1).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -657,23 +639,31 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
                                         <div class="Sell">Kirayə</div>
                                     }
-                                <div class="Price">@item.Price Azn</div>
-                                @if (item.PropertyDocument.Id == 6)
-                                {
-                                    <i class="fas fa-file-signature document fa-1x"></i>
-                                }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -700,21 +690,10 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 2 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
     </div>
 </section>
 <!-- Köhnə tikili Advertisement end -->
-
 <!-- Həyəyt evi Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -737,12 +716,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center House">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 4 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 4 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -750,6 +729,7 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
@@ -766,7 +746,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -793,21 +780,10 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 4 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
-                }
-            </div>
-        </div>
+
     </div>
 </section>
 <!-- Həyəyt evi Advertisement end -->
-
 <!-- Villa Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -830,12 +806,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Villa">
-            @foreach (var item in Model.Advertisements.Where(x =>x.CategoryId==3 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 3 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -859,7 +835,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -886,22 +869,9 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 3 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
-
     </div>
 </section>
 <!-- Villa Advertisement end -->
-
 <!-- Bağ evi Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -924,12 +894,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center YasrHouse">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 5 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x=>x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 5 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -937,6 +907,7 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
@@ -953,7 +924,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -980,22 +958,11 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 5 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
 
     </div>
 </section>
 <!--  Bağ evi Advertisement end -->
-
 <!-- Ofis Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -1018,23 +985,24 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Office">
-            @foreach (var item in Model.Advertisements.Where(x =>x.CategoryId==6 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x=>x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 6 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -1047,7 +1015,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -1074,21 +1049,10 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 6 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
     </div>
 </section>
 <!--  Ofis Advertisement end -->
-
 <!-- Qaraj Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -1111,12 +1075,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Garage">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 7 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x=>x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 7 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -1124,6 +1088,7 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
@@ -1140,7 +1105,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -1167,22 +1139,11 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x =>x.CategoryId==7 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
 
     </div>
 </section>
 <!--  Qaraj Advertisement end -->
-
 <!-- Torpaq Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -1206,12 +1167,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Place">
-            @foreach (var item in Model.Advertisements.Where(x =>x.CategoryId==8 && x.PropertyCategoryId==1 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 8 && x.PropertyCategoryId == 1 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -1219,28 +1180,36 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
                                         <div class="Sell">Kirayə</div>
                                     }
-                                <div class="Price">@item.Price Azn</div>
-                                @if (item.PropertyDocument.Id == 6)
-                                {
-                                    <i class="fas fa-file-signature document fa-1x"></i>
-                                }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
-                                        <div class="detail">
-                                            <span> @item.Area sot </span> |
-                                        </div>
+                                    <div class="detail">
+                                        <span> @item.Area sot </span> |
+                                    </div>
                                     <div class="date">
                                         <span>@item.City.Name,</span>
                                         <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
@@ -1260,22 +1229,11 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 8 &&  x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
 
     </div>
 </section>
 <!--  Torpaq Advertisement end -->
-
 <!-- Obyekt Advertisement start -->
 <section id="advertisement">
     <div class="container">
@@ -1298,12 +1256,12 @@
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center PropertyOnject">
-            @foreach (var item in Model.Advertisements.Where(x =>x.CategoryId==9 && x.PropertyCategoryId==1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x=>x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 9 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(16))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -1311,6 +1269,7 @@
                                     @if (item.PropertyCategory.Id == 1)
                                     {
                                         <div class="Rent">Satış</div>
+
                                     }
                                     else
                                     {
@@ -1327,7 +1286,14 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
@@ -1354,17 +1320,7 @@
                 </div>
             }
         </div>
-        <div class="row Advertisement-place justify-content-center">
-            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 9 && x.IsPremium == false && x.IsVip == false).Count() > 8)
-                {
-                    <a href="#" class="btn Btn-yellow  btn-block">
-                        <i class="fas fa-plus"></i> Daha
-                        çox
-                    </a>
-                }
-            </div>
-        </div>
+
     </div>
 </section>
 <!--  Obyekt Advertisement end -->

@@ -1,0 +1,47 @@
+﻿@model News
+@{
+    ViewData["Title"] = "DeleteNew";
+}
+
+<!-- NewDetails start -->
+<section id="NewDetails">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-danger">Bu elani silməyə əminsiniz?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <h3 class=" my-3">@Model.Title</h3>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="text-right  my-3">
+                    <span class="New-View all">Baxiş : @Model.ViewCount </span>|<br class="d-lg-none">
+                    <span class="ml-2 New-Author all">Muəllif : @Model.Author </span>|<br class="d-lg-none">
+                    <span class="ml-2 New-Date all">@String.Format("{0:M/d/yyyy}", Model.PublishDate)</span> |
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 col-12">
+                <div class="img">
+                    <img src="~/Images/News/@Model.ImageUrl" alt="" class="img-fluid w-100 ">
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="py-3">
+                    @Model.Info
+                </p>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a asp-controller="Newss" asp-action="DeleteNew" class="btn btn-click btn-danger btn-block">Sil</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- NewDetails end -->

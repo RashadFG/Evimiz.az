@@ -303,9 +303,9 @@
                 <div class="row ">
                     <div class="col-lg-6 col-12">
                         <ul class="d-flex left-ul">
-                            <li class="active box-shadow-f" data-id="1"><i class="fas fa-search mr-2  "></i>Al</li>
-                            <li class="ml-2 box-shadow-f" data-id="2"><i class="fas fa-search mr-2 "></i>Kirayə</li>
-                            <li class="ml-2 box-shadow-f" data-id="3"><i class="fas fa-search mr-2"></i>Ətraflı</li>
+                            <li class="active box-shadow-f" data-id="1"><i class="fas fa-search mr-2  "></i>Axtarış</li>
+                            @*<li class="ml-2 box-shadow-f" data-id="2"><i class="fas fa-search mr-2 "></i>Kirayə</li>
+                            <li class="ml-2 box-shadow-f" data-id="3"><i class="fas fa-search mr-2"></i>Ətraflı</li>*@
                         </ul>
                     </div>
                     <div class="col-lg-6 col-12">
@@ -324,40 +324,38 @@
                 <div class="d-none  under-tabs tab-active" data-id="1">
                     <div class="row ">
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
-                                <option value="">Yeni tikili otaq sayı</option>
+                            <select class="form-control category-search" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" >
+                                <option value="0">Əmlakın növü</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))" >
-                                <option value="">Köhnə tikili otaq sayı</option>
-
+                            <select class="form-control room-search" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))" >
+                                <option value="0">Otaq sayı</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))">
+                            <select class="form-control region-search" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))">
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
                             <div class="Btn-first">
                                 <div class="btn-overlay"></div>
-                                <input class=" btn btn-block " type="submit" value="Axtar">
+                                <input class=" btn btn-block btn-search" type="submit" value="Axtar">
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- İcarə -->
-                <div class="d-none under-tabs" data-id="2">
+                @*<div class="d-none under-tabs" data-id="2">
                     <div class="row ">
-
                         <div class="col-lg-3 col-md-6 col-12">
-                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
-                                <option value="0">Yeni tikili otaq sayı</option>
+                            <select class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
+                                <option value="0">Əmlakın növü</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
                             <select class="form-control" asp-items="@(new SelectList(ViewBag.Rooms, "Id", "Count"))">
-                                <option value="0">Köhnə tikili otaq sayı</option>
+                                <option value="0">Otaq sayı</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
@@ -370,9 +368,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- Ümumi -->
-                <div class="d-none under-tabs" data-id="3">
+                @*<div class="d-none under-tabs" data-id="3">
                     <div class="row ">
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="col-12">
@@ -435,7 +433,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             }
             <!-- Addres -->
             <div class="logIn-register d-none">
@@ -480,7 +478,7 @@
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <div class="items">
-                                        <a asp-controller="Evimiz" asp-action="Profilim"> <i class="fas fa-user-circle"></i> Profilim</a>
+                                        <a asp-controller="Evimiz" asp-action="Profilim" > <i class="fas fa-user-circle"></i> Profilim</a>
                                     </div>
                                 </div>
                             }

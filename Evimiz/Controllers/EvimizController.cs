@@ -4,7 +4,6 @@ using Evimiz.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,16 +12,16 @@ namespace Evimiz.Controllers
     public class EvimizController : Controller
     {
         private readonly Db_Evimiz _context;
-        private readonly SignInManager<İstifadəçi> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IHostingEnvironment _env;
-        private readonly UserManager<İstifadəçi> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public EvimizController(Db_Evimiz context,
                               RoleManager<IdentityRole> roleManager,
                               IHostingEnvironment env,
-                              UserManager<İstifadəçi> userManager,
-                               SignInManager<İstifadəçi> signInManager
+                              UserManager<ApplicationUser> userManager,
+                               SignInManager<ApplicationUser> signInManager
                               )
         {
             _context = context;
@@ -89,11 +88,50 @@ namespace Evimiz.Controllers
         {
             return View();
         }
-
-        [ActionName("Profilim")]
-        public IActionResult MyProfile()
+        
+        public async Task<IActionResult> Profilim()
         {
-            return View();
+            ApplicationUser OnlineUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+
+                ViewModel model = new ViewModel()
+                {
+                    Advertisements = _context.Advertisements.Where(x => x.ApplicationUserId == OnlineUser.Id),
+                    User = OnlineUser
+                };
+
+                return View(model);
+
+        }
+
+        public async Task<IActionResult> OfflineProfile(string id)
+        {
+            //ApplicationUser OnlineUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            //if (id == null || id == OnlineUser.Id)
+            //{
+            //    ViewModel model = new ViewModel()
+            //    {
+            //        Advertisements = _context.Advertisements.Where(x => x.ApplicationUserId == OnlineUser.Id),
+            //        User = OnlineUser
+            //    };
+
+            //    return View(model);
+            //}
+            //else
+            //{
+                ApplicationUser offlineUser = await _userManager.FindByIdAsync(id);
+               
+
+                ViewModel model = new ViewModel()
+                {
+                    Advertisements = _context.Advertisements.Where(x => x.ApplicationUserId == offlineUser.Id),
+                    User = offlineUser
+                };
+
+                return View(model);
+            //}
+
+            //return View();
         }
 
         [ActionName("Haqqımızda")]

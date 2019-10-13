@@ -1,0 +1,297 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Haqqinda";
+}
+
+<section id="advertisement-details">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-lg-3 col-6 ">
+                <div class="topAdDetails mt-1">
+                    @Model.Advertisement.Category.Name
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <a class="d-block topAdDetails mt-1">
+                    @Model.Advertisement.Price AZN
+                </a>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="topAdDetails mt-1">
+                    <i class="far fa-calendar-alt mr-2"></i>:@String.Format("{0:dd-MM-yyyy}", Model.Advertisement.PublishDate)
+                </div>
+            </div>
+            <div class="col-lg-3 col-6 ">
+                <a href="#" class="d-block topAdDetails mt-1">
+                    <i class="fas fa-flag-checkered mr-2"></i>Şikayət et
+                </a>
+            </div>
+
+        </div>
+        <div class="row my-2 ">
+            <div class="col-md-6 col-12 @*d-none d-lg-block*@ ">
+                <img src="~/Images/Advertisement/@Model.Advertisement.Images.FirstOrDefault(x=>x.IsMainPhoto==true).Name" class="img-fluid w-100 area-big-photo">
+            </div>
+            <div class="col-md-6 col-12 @*d-none d-lg-block" *@>
+                <div class="row small-images-slider">
+                    @foreach (var item in Model.Advertisement.Images)
+                    {
+                        @if (Model.Advertisement.Images.Count() < 21)
+                        {
+                            <div class="col-lg-3  col-6  col- mt-1 h-full">
+                                <img src="~/Images/Advertisement/@item.Name" class="img-fluid w-100 img-h ">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-2  col-md-3 col-6  mt-1 h-full">
+                                <img src="~/Images/Advertisement/@item.Name" class="img-fluid w-100 img-h ">
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row justify-content-center">
+            @if (Model.Advertisement.CategoryId != 7 || Model.Advertisement.CategoryId != 8)
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name @Model.Advertisement.Room.Count otaqlı | @Model.Advertisement.Category.Name @Model.Advertisement.Area m<sup>2</sup>| @Model.Advertisement.City.Name</h2>
+            }
+            else if (Model.Advertisement.CategoryId == 7)
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name  | @Model.Advertisement.Category.Name @Model.Advertisement.Area m<sup>2</sup>| @Model.Advertisement.City.Name</h2>
+            }
+            else
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name  | @Model.Advertisement.Category.Name @Model.Advertisement.Area sot| @Model.Advertisement.City.Name</h2>
+            }
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <h2>Əsas məlumatlar</h2>
+                <div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                @Model.Advertisement.About
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <div class="info p-3">
+                                Əmlakın növü
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info p-3 bold">
+                                @Model.Advertisement.Category.Name
+                            </div>
+                        </div>
+                        @if (Model.Advertisement.CategoryId == 1 || Model.Advertisement.CategoryId == 2 || Model.Advertisement.CategoryId == 6)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Otaqların sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Room.Count
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Mərtəbə sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Floor.Count
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Binanın Mərtəbə sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Rank.Count
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Advertisement.CategoryId == 3 || Model.Advertisement.CategoryId == 5 || Model.Advertisement.CategoryId == 6 || Model.Advertisement.CategoryId == 9)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Otaqların sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Room.Count
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Mərtəbə sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Floor.Count
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Advertisement.CategoryId == 3)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area sot
+                                </div>
+                            </div>
+                        }
+
+                        <div class="col-6">
+                            <div class="info p-3">
+                                Təmiri
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info p-3 bold">
+                                @Model.Advertisement.PropertyRepair.Name
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info p-3">
+                                Sənədin tipi
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="info p-3 bold">
+                                @Model.Advertisement.PropertyDocument.Name
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                @if (Model.Advertisement.ApplicationUser.İsAgent == true)
+                {
+                    <a  class="agent-ad p-2 d-block mt-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="agent-img">
+                                    @if (Model.Advertisement.ApplicationUser.UserImageUrl == null)
+                                    {
+                                        <img src="~/Images/Agent/default-logo.png" class="img-fluid w-100" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/Agent/@Model.Advertisement.ApplicationUser.UserImageUrl" class="img-fluid w-100" />
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p>@Model.Advertisement.ApplicationUser.Firstname emklak , <span class="ml-2">@Model.Advertisement.ApplicationUser.Region.Name</span></p>
+                                <p>
+                                    @Model.Advertisement.ApplicationUser.NumberKeyCode.Kcode@Model.Advertisement.ApplicationUser.PhoneNumber
+                                    @if (Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode != null)
+                                    {
+                                        <span class="ml-2">@Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode@Model.Advertisement.ApplicationUser.SecondPhonenumber</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <a  class="user-ad p-2 d-block mt-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="agent-img">
+                                    @if (Model.Advertisement.ApplicationUser.UserImageUrl == null)
+                                    {
+                                        <img src="~/Images/profile/empty-profile.png" class="img-fluid w-100" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/profile/@Model.Advertisement.ApplicationUser.UserImageUrl" class="img-fluid w-100" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p>@Model.Advertisement.ApplicationUser.Firstname @Model.Advertisement.ApplicationUser.Lastname</p>
+                                <p>
+                                    @Model.Advertisement.ApplicationUser.NumberKeyCode.Kcode@Model.Advertisement.ApplicationUser.PhoneNumber
+                                    @if (Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode != null)
+                                    {
+                                        <span class="ml-2">@Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode@Model.Advertisement.ApplicationUser.SecondPhonenumber</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                }
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12157.71469426235!2d49.8539455!3d40.3771909!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc20aa51a5f0b5e01!2sCode%20Academy!5e0!3m2!1sen!2s!4v1566992963166!5m2!1sen!2s"
+                            width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+                <div class="ovarlay-adress">
+                    <p class="text-white">
+                        @Model.Advertisement.Address
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+

@@ -68,7 +68,7 @@ using Evimiz.ViewModels;
             WriteLiteral("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
             EndContext();
             BeginContext(62, 1180, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2d2338a07a4b408aaeb656ce89cc7a93", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eab510ff756b40528518dbbb0d5eb2d8", async() => {
                 BeginContext(68, 1117, true);
                 WriteLiteral(@"
     <meta charset=""UTF-8"">
@@ -88,7 +88,7 @@ using Evimiz.ViewModels;
                 WriteLiteral("yR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">\r\n    ");
                 EndContext();
                 BeginContext(1185, 48, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "f40b3a94328c4cb8beba396ab75c6e02", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "45b4c691b6df407f90cb13043469a264", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -122,7 +122,7 @@ using Evimiz.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(1244, 821, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9afab7226da4c48b91ebc9d1e058a12", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "06492bc8ac3447688befdce9383f29a5", async() => {
                 BeginContext(1250, 808, true);
                 WriteLiteral(@"
     <div class=""site-blocks-cover overlay"" style=""background-image: url('/images/contemporary-exterior.jpg');"" data-aos=""fade"" data-stellar-background-ratio=""0.5"">

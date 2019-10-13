@@ -87,7 +87,7 @@ using Evimiz.ViewModels;
             WriteLiteral("                edirik. Buda saytımızın dahada istifadəyə yararlı olmasına gətirib çıxardır..\r\n                </p>\r\n            </div>\r\n            <div class=\"col-md-6 col-12\">\r\n                <div class=\"about-img p-2\">\r\n                     ");
             EndContext();
             BeginContext(1318, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "13178f3b9e8d45e69151d2820f57746e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "81a24f3a2b6e44aaadfe491fb05848db", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

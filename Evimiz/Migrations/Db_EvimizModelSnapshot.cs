@@ -33,6 +33,8 @@ namespace Evimiz.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<int>("Area");
 
                     b.Property<int>("CategoryId");
@@ -83,9 +85,9 @@ namespace Evimiz.Migrations
 
                     b.Property<int?>("VillageId");
 
-                    b.Property<string>("İstifadəçiId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -115,9 +117,95 @@ namespace Evimiz.Migrations
 
                     b.HasIndex("VillageId");
 
-                    b.HasIndex("İstifadəçiId");
-
                     b.ToTable("Advertisements");
+                });
+
+            modelBuilder.Entity("Evimiz.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("AgencyImageUrl")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Agencyabout")
+                        .HasMaxLength(700);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Lastname")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<int>("NumberKeyCodeId");
+
+                    b.Property<int?>("NumberKeyCodeSecondId");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<int?>("RegionId");
+
+                    b.Property<DateTime>("RegisterDate");
+
+                    b.Property<string>("SecondPhonenumber")
+                        .HasMaxLength(7);
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserImageUrl")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("İsAgent");
+
+                    b.Property<bool>("İsUser");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("NumberKeyCodeId");
+
+                    b.HasIndex("NumberKeyCodeSecondId");
+
+                    b.HasIndex("RegionId");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Evimiz.Models.Category", b =>
@@ -298,94 +386,6 @@ namespace Evimiz.Migrations
                     b.HasIndex("AdvertisementId");
 
                     b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("Evimiz.Models.İstifadəçi", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("AgencyImageUrl")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Agencyabout")
-                        .HasMaxLength(700);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Firstname")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Lastname")
-                        .HasMaxLength(100);
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<int>("NumberKeyCodeId");
-
-                    b.Property<int?>("NumberKeyCodeSecondId");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<int?>("RegionId");
-
-                    b.Property<DateTime>("RegisterDate");
-
-                    b.Property<string>("SecondPhonenumber")
-                        .HasMaxLength(7);
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserImageUrl")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("İsAgent");
-
-                    b.Property<bool>("İsUser");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("NumberKeyCodeId");
-
-                    b.HasIndex("NumberKeyCodeSecondId");
-
-                    b.HasIndex("RegionId");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Evimiz.Models.Metro", b =>
@@ -985,6 +985,10 @@ namespace Evimiz.Migrations
 
             modelBuilder.Entity("Evimiz.Models.Advertisement", b =>
                 {
+                    b.HasOne("Evimiz.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Advertisements")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("Evimiz.Models.Category", "Category")
                         .WithMany("Advertisements")
                         .HasForeignKey("CategoryId")
@@ -1046,21 +1050,9 @@ namespace Evimiz.Migrations
                     b.HasOne("Evimiz.Models.Village", "Village")
                         .WithMany("Advertisements")
                         .HasForeignKey("VillageId");
-
-                    b.HasOne("Evimiz.Models.İstifadəçi", "User")
-                        .WithMany("Advertisements")
-                        .HasForeignKey("İstifadəçiId");
                 });
 
-            modelBuilder.Entity("Evimiz.Models.Image", b =>
-                {
-                    b.HasOne("Evimiz.Models.Advertisement", "Advertisement")
-                        .WithMany("Images")
-                        .HasForeignKey("AdvertisementId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Evimiz.Models.İstifadəçi", b =>
+            modelBuilder.Entity("Evimiz.Models.ApplicationUser", b =>
                 {
                     b.HasOne("Evimiz.Models.NumberKeyCode", "NumberKeyCode")
                         .WithMany()
@@ -1074,6 +1066,14 @@ namespace Evimiz.Migrations
                     b.HasOne("Evimiz.Models.Region", "Region")
                         .WithMany("İstifadəçilər")
                         .HasForeignKey("RegionId");
+                });
+
+            modelBuilder.Entity("Evimiz.Models.Image", b =>
+                {
+                    b.HasOne("Evimiz.Models.Advertisement", "Advertisement")
+                        .WithMany("Images")
+                        .HasForeignKey("AdvertisementId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Evimiz.Models.Order", b =>
@@ -1115,7 +1115,7 @@ namespace Evimiz.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Evimiz.Models.İstifadəçi")
+                    b.HasOne("Evimiz.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1123,7 +1123,7 @@ namespace Evimiz.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Evimiz.Models.İstifadəçi")
+                    b.HasOne("Evimiz.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1136,7 +1136,7 @@ namespace Evimiz.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Evimiz.Models.İstifadəçi")
+                    b.HasOne("Evimiz.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1144,7 +1144,7 @@ namespace Evimiz.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Evimiz.Models.İstifadəçi")
+                    b.HasOne("Evimiz.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

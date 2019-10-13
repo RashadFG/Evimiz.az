@@ -1,0 +1,132 @@
+﻿@model EditUserPRofileViewModel
+@{
+    ViewData["Title"] = "UserDüzəlişEt";
+}
+
+<form enctype="multipart/form-data" method="post">
+    <!-- EditUser start -->
+    <section id="Register">
+        <div class="container">
+            <div class="row my-4">
+                <div class="col-12">
+                    <h2>Profilinə düzəliş et</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 validation-error"></div>
+                <div class="col-md-6 col-12">
+                    <input type="text" class="form-control my-2 p-2" placeholder="Ad" asp-for="Firstname" value="@ViewBag.FirstName">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="Firstname"></span>
+                    </div>
+                </div>
+                @if (ViewBag.LastName != null)
+                {
+                    <div class="col-md-6 col-12">
+                        <input type="text" class="form-control my-2 p-2" placeholder="Soyad" asp-for="Lastname" value="@ViewBag.LastName">
+                        <div class="validation-error my-2 p-2">
+                            <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                            <span asp-validation-for="Lastname"></span>
+                        </div>
+                    </div>
+                }
+                <div class="col-md-6 col-12">
+                    <input type="text" class="form-control my-2 p-2" placeholder="Email" asp-for="Email" value="@ViewBag.Email">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="row">
+                        <div class="col-4">
+                            <select class="form-control my-2 p-2" asp-items="@(new SelectList(ViewBag.NumberKeyCode, "Id", "Kcode",ViewBag.NumberKeyCodeId))"
+                                    asp-for="NumberKeyCodeId"></select>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control my-2 p-2" placeholder="Nömrə" asp-for="PhoneNumber" value="@ViewBag.PhoneNumber">
+                            <div class="validation-error my-2 p-2">
+                                <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                <span asp-validation-for="PhoneNumber"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 order-2 order-md-0">
+                    <input class="form-control my-2 p-2" placeholder="Hazırki şifrə" asp-for="CurrentPassword">
+                </div>
+                @if (ViewBag.SecondPhonenumber != null)
+                {
+                    <div class="col-md-6 col-12 order-1 order-md-0">
+                        <div class="row  d-none plus-div">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <select class="form-control mt-2"
+                                            asp-items="@(new SelectList(ViewBag.NumberKeyCodeSecond, "Id", "Kcode", ViewBag.NumberKeyCodeSecondId))"
+                                            asp-for="NumberKeyCodeSecondId"></select>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-group position-relative">
+                                    <input class="form-control   mt-2" placeholder="Növbəti nömrə" asp-for="SecondPhonenumber" value="@ViewBag.SecondPhonenumber">
+                                    <div class="validation-error">
+                                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                                        <span asp-validation-for="SecondPhonenumber"></span>
+                                    </div>
+                                </div>
+                                <span class="ft-s"><i class="fas fa-window-close close-input"></i></span>
+
+                            </div>
+                        </div>
+                        <div class="col-12 p-0">
+                            <div class="add-phoneNumber   mt-2 Yellow-bg ">
+                                <i class="fas fa-plus mr-3"></i>Əlavə nömrə
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-md-6 col-12 order-2 order-md-0">
+                    <input type="text" class="form-control my-2 p-2" placeholder="Yeni şifrə" asp-for="NewPassword">
+                    <div class="validation-error my-2 p-2">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="NewPassword"></span>
+                    </div>
+                </div>
+
+                @if (ViewBag.UserImageUrl != null)
+                {
+                    <div class="col-md-6 col-12 order-2 order-md-0">
+                        <div class=" d-flex justify-content-center ">
+                            <div class="col-lg-5 col-md-10 col-6 position-relative p-0">
+                                <img class="img-fluid img-condition rounded w-100" src="~/Images/profile/@ViewBag.UserImageUrl " />
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-md-6 col-12 order-2 order-md-0">
+                    <div class="border-image d-flex justify-content-center ">
+                    </div>
+                    <div class="upload-user-img my-2 text-center orange">
+                        <i class="fas fa-upload mr-3"></i> Şəkili  dəyiş
+                        <input class="form-control  user-img d-none" asp-for="@Model.UserPhoto">
+                    </div>
+                    <div class="validation-error my-2 p-2 ">
+                        <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
+                        <span asp-validation-for="@Model.UserPhoto"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-12">
+                    <input type="submit" class=" form-control mt-2 btn-block green-bg my-2" value="Düzəliş et">
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- EditUser end -->
+</form>

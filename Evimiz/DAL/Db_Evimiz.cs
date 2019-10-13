@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Evimiz.DAL
 {
-    public class Db_Evimiz : IdentityDbContext<İstifadəçi>
+    public class Db_Evimiz : IdentityDbContext<ApplicationUser>
     {
         public Db_Evimiz(DbContextOptions<Db_Evimiz> options) : base(options)
         {

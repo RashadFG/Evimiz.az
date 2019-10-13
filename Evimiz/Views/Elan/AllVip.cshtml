@@ -1,4 +1,4 @@
-﻿@*@model  ViewModel
+﻿@model  ViewModel
 @{
     ViewData["Title"] = "AllVip";
 }
@@ -11,34 +11,26 @@
                 <i class="fas fa-gem gem mr-2 color-blue"></i> Vip elanlar
             </div>
             <div class="col-md-4 col-12  d-md-flex justify-content-end ">
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked id="checkbox1">
-                        <span class="slider-check round"></span>
-                    </label>
-                    Satilır
-                </span>
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center VIP">
-            @foreach (var item in Model.Advertisements.Where(x => x.IsVip == true && x.PropertyCategoryId == 1).OrderByDescending(x=>x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.IsVip == true ).OrderByDescending(x => x.PublishDate).Take(20))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -51,55 +43,62 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     @if (item.CategoryId == 1)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.NewPlace.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.NewPlace.Floor/@item.Home.NewPlace.FloorCount m</span>
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 2)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.OldPlace.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.OldPlace.Floor/@item.Home.OldPlace.FloorCount m</span>
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 4)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.House.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.House.Floor  m</span>
+                                            <span> @item.Floor.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 3)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.Villa.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.Villa.Floor m</span>
+                                            <span> @item.Floor.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 5)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.YardHouse.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.YardHouse.Floor  m</span>
+                                            <span> @item.Floor.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 6)
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.Office.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.Office.Floor / @item.Home.Office.FloorCount m</span>
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
                                         </div>
                                     }
                                     else if (item.CategoryId == 7)
@@ -117,13 +116,13 @@
                                     else
                                     {
                                         <div class="detail">
-                                            <span>@item.Home.PropertyObject.RoomCount otaqlı </span> |
+                                            <span>@item.Room.Count otaqlı </span> |
                                             <span> @item.Area m<sup>2</sup> </span> |
-                                            <span> @item.Home.PropertyObject.Floor m</span>
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
                                         </div>
                                     }
                                     <div class="date">
-                                        <span>@item.Region.City.Name,</span>
+                                        <span>@item.City.Name,</span>
                                         <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
                                     </div>
                                     @if (item.IsVip == true)
@@ -145,7 +144,9 @@
             <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
                 @if (Model.Advertisements.Where(x => x.IsVip == true).Count() > 8)
                 {
-                    <a href="#" class="btn Btn-yellow  btn-block">
+                    <input type="hidden" value="20" id="changeSkipVip" />
+                    <input type="hidden" value="@Model.Advertisements.Where(x => x.IsVip == true).Count()" />
+                    <a class="btn Btn-yellow  btn-block load-more-btn-premium-vip">
                         <i class="fas fa-plus"></i> Daha
                         çox
                     </a>
@@ -155,4 +156,4 @@
 
     </div>
 </section>
-<!-- Vip Advertisement end -->*@
+<!-- Vip Advertisement end -->

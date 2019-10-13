@@ -9,6 +9,7 @@ namespace Evimiz.ViewModels
 {
     public class ViewModel
     {
+        public ApplicationUser User { get; set; }
         public Advertisement Advertisement { get; set; }
         public IEnumerable<Advertisement> Advertisements { get; set; }
         public IEnumerable<Category> Categories { get; set; }
@@ -25,7 +26,7 @@ namespace Evimiz.ViewModels
         public IEnumerable<Region> Regions { get; set; }
         public IEnumerable<Rent> Rents { get; set; }
         public IEnumerable<Village> Villages { get; set; }
-        public IEnumerable<İstifadəçi> Users { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
         public IEnumerable<Room> Rooms { get; set; }
         public IEnumerable<Floor> Floors { get; set; }
         public IEnumerable<Rank> Ranks { get; set; }

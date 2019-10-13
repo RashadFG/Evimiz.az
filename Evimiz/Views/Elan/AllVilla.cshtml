@@ -1,33 +1,25 @@
-﻿@*@model ViewModel
+﻿@model ViewModel
 @{
     ViewData["Title"] = "AllVilla";
 }
 
-<!-- Həyəyt evi Advertisement start -->
+<!-- Villa Advertisement start -->
 <section id="advertisement">
     <div class="container">
         <div class="row head">
             <div class="col-md-8 col-12 ">
-                <i class="fas fa-home mr-2 color-blue"></i> Həyəyt evi
+                <i class="fas fa-hotel mr-2 color-blue"></i> Villa
             </div>
             <div class="col-md-4 col-12  d-md-flex justify-content-end">
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked id="checkbox6">
-                        <span class="slider-check round"></span>
-                    </label>
-                    Satilır
-                </span>
             </div>
         </div>
-        <div class="row Advertisement-place justify-content-center House">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 4 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x=>x.PublishDate))
+        <div class="row Advertisement-place justify-content-center Villa">
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 3 && x.IsPremium == false && x.IsVip == false).Take(20))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
@@ -51,16 +43,23 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
-                                        <span>@item.Home.House.RoomCount otaqlı </span> |
+                                        <span>@item.Room.Count otaqlı </span> |
                                         <span> @item.Area m<sup>2</sup> </span> |
-                                        <span> @item.Home.House.Floor m</span>
+                                        <span> @item.Floor.Count m</span>
                                     </div>
                                     <div class="date">
-                                        <span>@item.Region.City.Name,</span>
+                                        <span>@item.City.Name,</span>
                                         <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
                                     </div>
                                     @if (item.IsVip == true)
@@ -80,15 +79,18 @@
         </div>
         <div class="row Advertisement-place justify-content-center">
             <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 4 && x.IsPremium == false && x.IsVip == false).Count() > 8)
+                @if (Model.Advertisements.Where(x => x.CategoryId == 3 && x.IsPremium == false && x.IsVip == false).Count() > 20)
                 {
-                    <a href="#" class="btn Btn-yellow  btn-block">
+                    <input type="hidden" value="20" id="changeSkipVilla" />
+                    <input type="hidden" value="@Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip == false && x.CategoryId == 3).Count()" />
+                    <a class="btn Btn-yellow  btn-block load-more-btn-Villa">
                         <i class="fas fa-plus"></i> Daha
                         çox
                     </a>
                 }
             </div>
         </div>
+
     </div>
 </section>
-<!-- Həyəyt evi Advertisement end -->*@
+<!-- Villa Advertisement end -->

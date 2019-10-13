@@ -1,4 +1,4 @@
-﻿@*@model ViewModel
+﻿@model ViewModel
 @{
     ViewData["Title"] = "AllOffice";
 }
@@ -9,39 +9,28 @@
         <div class="row head">
             <div class="col-md-8 col-12 ">
                 <i class="fas fa-mail-bulk mr-2 color-blue"></i> Ofis
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked id="checkbox8">
-                        <span class="slider-check round"></span>
-                    </label>
-                    Satilır
-                </span>
             </div>
             <div class="col-md-4 col-12  d-md-flex justify-content-end">
-                <a asp-controller="Elan" asp-action="AllOffice">
-                    Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i>
-                </a>
             </div>
         </div>
         <div class="row Advertisement-place justify-content-center Office">
-            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 6 && x.PropertyCategoryId == 1 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate))
+            @foreach (var item in Model.Advertisements.Where(x => x.CategoryId == 6 && x.IsPremium == false && x.IsVip == false).OrderByDescending(x => x.PublishDate).Take(20))
             {
                 <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <i class="fas fa-heart heart fa-2x d-none"></i>
                     <i class="far fa-heart heart fa-2x"></i>
-                    <a asp-controller="Elan" asp-action="Haqqında">
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="img">
                                     <img src="~/images/Advertisement/@Model.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
                                     @if (item.PropertyCategory.Id == 1)
                                     {
-                                        <div class="Rent">Kirayə</div>
+                                        <div class="Rent">Satış</div>
                                     }
                                     else
                                     {
-                                        <div class="Sell">Satış</div>
+                                        <div class="Sell">Kirayə</div>
                                     }
                                     <div class="Price">@item.Price Azn</div>
                                     @if (item.PropertyDocument.Id == 6)
@@ -54,16 +43,23 @@
                                 <div class="about-advertisement">
                                     <div class="location">
                                         <div class="col-12 p-0">
-                                            <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
                                         </div>
                                     </div>
                                     <div class="detail">
-                                        <span>@item.Home.Office.RoomCount otaqlı </span> |
+                                        <span>@item.Room.Count otaqlı </span> |
                                         <span> @item.Area m<sup>2</sup> </span> |
-                                        <span> @item.Home.Office.Floor / @item.Home.Office.FloorCount m</span>
+                                        <span> @item.Floor.Count/@item.Rank.Count m</span>
                                     </div>
                                     <div class="date">
-                                        <span>@item.Region.City.Name,</span>
+                                        <span>@item.City.Name,</span>
                                         <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
                                     </div>
                                     @if (item.IsVip == true)
@@ -83,9 +79,11 @@
         </div>
         <div class="row Advertisement-place justify-content-center">
             <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
-                @if (Model.Advertisements.Where(x => x.CategoryId == 6 && x.IsPremium == false && x.IsVip == false).Count() > 8)
+                @if (Model.Advertisements.Where(x => x.CategoryId == 6 && x.IsPremium == false && x.IsVip == false).Count() > 20)
                 {
-                    <a href="#" class="btn Btn-yellow  btn-block">
+                    <input type="hidden" value="20" id="changeSkipOffice" />
+                    <input type="hidden" value="@Model.Advertisements.Where(x => x.IsPremium == false && x.IsVip == false && x.CategoryId == 6).Count()" />
+                    <a class="btn Btn-yellow  btn-block load-more-btn-Office">
                         <i class="fas fa-plus"></i> Daha
                         çox
                     </a>
@@ -94,4 +92,4 @@
         </div>
     </div>
 </section>
-<!--  Ofis Advertisement end -->*@
+<!--  Ofis Advertisement end -->

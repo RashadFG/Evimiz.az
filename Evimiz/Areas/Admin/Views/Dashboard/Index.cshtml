@@ -1,0 +1,87 @@
+﻿@model ViewModel
+
+<div class="row m-0">
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-bell mr-3"></i> Yeni elanlar </div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Advertisements.Where(x => x.IsConfirmed == false).Count()
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-clipboard mr-3"></i> Elanların sayı</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Advertisements.Count()
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-check mr-3"></i> Təsdiqlənmiş  elanlar</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Advertisements.Where(x => x.IsConfirmed == true).Count()
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-exclamation-triangle mr-3"></i>Təsdiqlənməmiş elanlar</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Advertisements.Where(x => x.IsConfirmed == false).Count()
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-exclamation-triangle mr-3"></i>Silinmiş elanlar</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Advertisements.Where(x => x.IsDeleted == true).Count()
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-male mr-3"></i> İççilər</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    12
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="far fa-envelope mr-3"></i>  Məktublar</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    12
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-4">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><i class="fas fa-users mr-3"></i> Istifadəçi sayı</div>
+            <div class="card-body">
+                <div class="User-Count" style="font-size:30px">
+                    @Model.Users.Count()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

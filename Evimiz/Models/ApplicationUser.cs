@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Evimiz.Models
 {
-    public class İstifadəçi : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
-        public İstifadəçi()
+        public ApplicationUser()
         {
             Advertisements = new HashSet<Advertisement>();
         }
@@ -47,6 +47,12 @@ namespace Evimiz.Models
 
         public int? RegionId { get; set; }
         public virtual Region Region { get; set; }
+
+        [NotMapped]
+        public IFormFile UserPhoto { get; set; }
+
+        [NotMapped]
+        public IFormFile AgencyPhoto { get; set; }
 
         public virtual ICollection<Advertisement> Advertisements { get; set; }
     }

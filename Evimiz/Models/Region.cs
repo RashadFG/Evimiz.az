@@ -11,7 +11,7 @@ namespace Evimiz.Models
         public Region()
         {
             Advertisement = new HashSet<Advertisement>();
-            İstifadəçilər = new HashSet<İstifadəçi>();
+            İstifadəçilər = new HashSet<ApplicationUser>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace Evimiz.Models
         public virtual City City { get; set; }
 
         public virtual ICollection<Advertisement> Advertisement { get; set; }
-        public virtual ICollection<İstifadəçi> İstifadəçilər { get; set; }
+        public virtual ICollection<ApplicationUser> İstifadəçilər { get; set; }
     }
 }

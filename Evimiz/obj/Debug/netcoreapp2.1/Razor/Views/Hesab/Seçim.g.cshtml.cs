@@ -83,7 +83,7 @@ using Evimiz.ViewModels;
                 ");
             EndContext();
             BeginContext(506, 611, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "76ee4dab5f78407fa29d6f2d38ac90d6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f9318d9ce7244f8686ddc74455353248", async() => {
                 BeginContext(586, 527, true);
                 WriteLiteral(@"
                     <div class=""change-div text-center  py-5"">
@@ -124,7 +124,7 @@ using Evimiz.ViewModels;
             WriteLiteral("\r\n            </div>\r\n            <div class=\"col-6\">\r\n                ");
             EndContext();
             BeginContext(1188, 631, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "006c7b39245442bdae9fa77fc639e22c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c6abc66e5d6b48eeb087cdd6df154486", async() => {
                 BeginContext(1265, 550, true);
                 WriteLiteral(@"
                     <div class=""change-div text-center py-5"">

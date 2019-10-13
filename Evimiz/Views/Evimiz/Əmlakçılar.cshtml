@@ -1,4 +1,4 @@
-﻿@model IEnumerable<İstifadəçi>
+﻿@model IEnumerable<ApplicationUser>
 @{
     ViewData["Title"] = "Əmlakçılar";
 }
@@ -16,30 +16,29 @@
         <div class="row  Advertisement-place">
             @foreach (var item in Model)
             {
-                <a asp-controller="Əmlakçılar" asp-action="Profilim" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
+                <a asp-controller="Əmlakçılar" asp-action="Profilim" asp-route-id="@item.Id" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
                     <div class="row">
                         <div class="col-12 ">
                             <div class="img">
-                                <img src="~/images/Agent/@item.AgencyImageUrl" class="img-fluid w-100">
+                                @if (item.AgencyImageUrl == null)
+                                {
+                                    <img src="~/images/Agent/default-logo.png" class="img-fluid w-100">
+                                }
+                                else
+                                {
+                                    <img src="~/images/Agent/@item.AgencyImageUrl" class="img-fluid w-100">
+                                }
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="about-agent">
-                                <h3>@item.Firstname emlak</h3>
-                                <span><i class="fas fa-map-marker-alt"></i> @item.Region.Name </span>
+                                <h6>@item. emlak</h6>
+                                <span><i class="fas fa-map-marker-alt"></i> @item.Region.Name</span>
                             </div>
                         </div>
                     </div>
                 </a>
             }
-        </div>
-        <div class="row  Advertisement-place justify-content-center ">
-            <div class="load-more  mt-3 col-md-4 col-6" data-aos="fade-left">
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
-            </div>
         </div>
     </div>
 </section>

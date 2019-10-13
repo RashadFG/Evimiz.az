@@ -17,16 +17,16 @@ namespace Evimiz.Controllers
     public class HesabController : Controller
     {
         private readonly Db_Evimiz _context;
-        private readonly UserManager<İstifadəçi> _usermanager;
+        private readonly UserManager<ApplicationUser> _usermanager;
         private readonly IConfiguration _configuration;
-        private readonly SignInManager<İstifadəçi> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHostingEnvironment _env;
         //private readonly RoleManager<İstifadəçi> _roleManager;
 
         public HesabController(Db_Evimiz context,
-                               UserManager<İstifadəçi> usermanager,
+                               UserManager<ApplicationUser> usermanager,
                                IConfiguration configuration,
-                               SignInManager<İstifadəçi> signInManager,
+                               SignInManager<ApplicationUser> signInManager,
                                IHostingEnvironment env
                              /*  RoleManager<İstifadəçi> roleManager*/)
         {
@@ -58,7 +58,7 @@ namespace Evimiz.Controllers
                 return View(loginViewModel);
             }
 
-            İstifadəçi user = await _usermanager.FindByEmailAsync(loginViewModel.Email);
+            ApplicationUser user = await _usermanager.FindByEmailAsync(loginViewModel.Email);
 
             if (user == null)
             {
@@ -119,7 +119,7 @@ namespace Evimiz.Controllers
                 return View(registerViewModel);
             }
 
-            İstifadəçi user = new İstifadəçi()
+            ApplicationUser user = new ApplicationUser()
             {
                 Firstname = registerViewModel.Firstname,
                 Lastname = registerViewModel.Lastname,
@@ -231,7 +231,7 @@ namespace Evimiz.Controllers
         {
             if (id != null)
             {
-                İstifadəçi user = await _usermanager.FindByIdAsync(id);
+                ApplicationUser user = await _usermanager.FindByIdAsync(id);
 
                 if (user != null)
                 {
@@ -264,7 +264,7 @@ namespace Evimiz.Controllers
                 return View(forgetPasswordViewModel);
             }
 
-            İstifadəçi user = await _usermanager.FindByEmailAsync(forgetPasswordViewModel.Email);
+            ApplicationUser user = await _usermanager.FindByEmailAsync(forgetPasswordViewModel.Email);
 
             if (user == null)
             {
@@ -304,7 +304,7 @@ namespace Evimiz.Controllers
                 return View("Views/Evimiz/Error.cshtml");
             }
 
-            İstifadəçi customUserFromDb = await _usermanager.FindByIdAsync(userId);
+            ApplicationUser customUserFromDb = await _usermanager.FindByIdAsync(userId);
 
             if (customUserFromDb == null)
             {
@@ -322,7 +322,7 @@ namespace Evimiz.Controllers
 
             ViewBag.UserId = resetAndSetNewPasswordViewModel.UserId;
             ViewBag.PasswordResetToken = resetAndSetNewPasswordViewModel.PasswordResetToken;
-            İstifadəçi customUserFromDb = await _usermanager.FindByIdAsync(resetAndSetNewPasswordViewModel.UserId);
+            ApplicationUser customUserFromDb = await _usermanager.FindByIdAsync(resetAndSetNewPasswordViewModel.UserId);
 
             if (!ModelState.IsValid)
             {
@@ -346,9 +346,357 @@ namespace Evimiz.Controllers
             return RedirectToAction("DaxilOl", "Hesab");
         }
 
-        public IActionResult DüzəlişEt()
+        [HttpGet]
+        public async  Task<IActionResult> UserDüzəlişEt()
         {
+            ApplicationUser user = await _usermanager.FindByNameAsync(User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.FirstName = user.Firstname;
+            ViewBag.LastName = user.Lastname;
+            ViewBag.Email = user.Email;
+
+            ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+            ViewBag.PhoneNumber = user.PhoneNumber;
+            ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+            ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+            ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+            ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+            ViewBag.UserImageUrl =user.UserImageUrl;
+
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UserDüzəlişEt(EditUserPRofileViewModel editUserPRofileViewModel)
+        {
+            ApplicationUser user = await _usermanager.FindByNameAsync(User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.FirstName = user.Firstname;
+                ViewBag.LastName = user.Lastname;
+                ViewBag.Email = user.Email;
+
+                ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                ViewBag.PhoneNumber = user.PhoneNumber;
+                ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                ViewBag.UserImageUrl = user.UserImageUrl;
+                return View(editUserPRofileViewModel);
+            }
+
+            user.Firstname = editUserPRofileViewModel.Firstname;
+            user.Lastname = editUserPRofileViewModel.Lastname;
+            user.Email = editUserPRofileViewModel.Email;
+            user.NumberKeyCodeId = editUserPRofileViewModel.NumberKeyCodeId;
+            user.PhoneNumber = editUserPRofileViewModel.PhoneNumber;
+            
+            user.NumberKeyCodeSecondId = editUserPRofileViewModel.NumberKeyCodeSecondId;
+            user.SecondPhonenumber = editUserPRofileViewModel.SecondPhonenumber;
+            
+            user.EmailConfirmed = true;
+
+            await _usermanager.UpdateAsync(user);
+
+            if (editUserPRofileViewModel.CurrentPassword != null && editUserPRofileViewModel.NewPassword != null)
+            {
+                string replacedCurrentPassword = editUserPRofileViewModel.CurrentPassword;
+                string replacedNewPassword = editUserPRofileViewModel.NewPassword;
+
+                IdentityResult result = await _usermanager.ChangePasswordAsync(user, replacedCurrentPassword, replacedNewPassword);
+                await _usermanager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    ViewBag.FirstName = user.Firstname;
+                    ViewBag.LastName = user.Lastname;
+                    ViewBag.Email = user.Email;
+
+                    ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                    ViewBag.PhoneNumber = user.PhoneNumber;
+                    ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                    ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                    ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                    ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                    ViewBag.UserImageUrl = user.UserImageUrl;
+
+                    ModelState.AddModelError("CurrentPassword", "Hazırki şifrə yanlışdır və ya yeni şifrə tələblərə uyğun deyil.");
+                    ModelState.AddModelError("NewPassword", "Hazırki şifrə yanlışdır və ya yeni şifrə tələblərə uyğun deyil.");
+                    return View(editUserPRofileViewModel);
+                }
+            }
+
+            if (editUserPRofileViewModel.UserPhoto != null)
+            {
+                if (editUserPRofileViewModel.UserPhoto.ContentType.Contains("image/jpg")
+                || editUserPRofileViewModel.UserPhoto.ContentType.Contains("image/jpeg"))
+                {
+                    if (editUserPRofileViewModel.UserPhoto.Length > (2 * 1024 * 1024))
+                    {
+                        ViewBag.FirstName = user.Firstname;
+                        ViewBag.LastName = user.Lastname;
+                        ViewBag.Email = user.Email;
+
+                        ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                        ViewBag.PhoneNumber = user.PhoneNumber;
+                        ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                        ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                        ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                        ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+                        ViewBag.UserImageUrl = user.UserImageUrl;
+                        ModelState.AddModelError("", "Şəklin həcmi 2MB'dan çox ola bilməz.");
+                        return View(editUserPRofileViewModel);
+                    }
+
+                    string folderPath = Path.Combine(_env.WebRootPath, "Images", "profile");
+                    string fileName = Guid.NewGuid().ToString() + "_" + editUserPRofileViewModel.UserPhoto.FileName;
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editUserPRofileViewModel.UserPhoto.CopyToAsync(fileStream);
+                    } 
+
+                    //Deleting profile picture of the user from file system
+                    string currentFilePath = Path.Combine(_env.WebRootPath, "Images", "profile", user.UserImageUrl);
+                    if (System.IO.File.Exists(currentFilePath))
+                    {
+                        System.IO.File.Delete(currentFilePath);
+                    }
+
+                    user.UserImageUrl = fileName;
+                    
+                    await _context.SaveChangesAsync() ;
+                }
+                else
+                {
+                    ViewBag.FirstName = user.Firstname;
+                    ViewBag.LastName = user.Lastname;
+                    ViewBag.Email = user.Email;
+
+                    ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                    ViewBag.PhoneNumber = user.PhoneNumber;
+                    ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                    ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                    ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                    ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                    ModelState.AddModelError("", "Zəhmət olmasa, tələb olunan formatda şəkil yükləyin");
+                    return View(editUserPRofileViewModel);
+                }
+            }
+
+            await _usermanager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("AnaSəhifə", "Evimiz"); ;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ƏmlakçıDüzəlişEt()
+        {
+            ApplicationUser user = await _usermanager.FindByNameAsync(User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.FirstName = user.Firstname;
+            ViewBag.Email = user.Email;
+
+            ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+            ViewBag.PhoneNumber = user.PhoneNumber;
+            ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+            ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+            ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+            ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+            ViewBag.RegionId = user.RegionId;
+            ViewBag.Regions = _context.Regions;
+            ViewBag.Agencyabout = user.Agencyabout;
+
+            ViewBag.AgencyImageUrl = user.AgencyImageUrl;
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ƏmlakçıDüzəlişEt(EditAgentPRofileViewModel editAgentPRofileViewModel)
+        {
+            ApplicationUser user = await _usermanager.FindByNameAsync(User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.FirstName = user.Firstname;
+                ViewBag.Email = user.Email;
+
+                ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                ViewBag.PhoneNumber = user.PhoneNumber;
+                ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                ViewBag.RegionId = user.RegionId;
+                ViewBag.Regions = _context.Regions;
+                ViewBag.Agencyabout = user.Agencyabout;
+
+                ViewBag.AgencyImageUrl = user.AgencyImageUrl;
+                return View(editAgentPRofileViewModel);
+            }
+
+            user.Firstname = editAgentPRofileViewModel.Firstname;
+            user.Email = editAgentPRofileViewModel.Email;
+            user.NumberKeyCodeId = editAgentPRofileViewModel.NumberKeyCodeId;
+            user.PhoneNumber = editAgentPRofileViewModel.PhoneNumber;
+            user.Agencyabout = editAgentPRofileViewModel.Agencyabout;
+            user.RegionId = editAgentPRofileViewModel.RegionId;
+
+            user.NumberKeyCodeSecondId = editAgentPRofileViewModel.NumberKeyCodeSecondId;
+            user.SecondPhonenumber = editAgentPRofileViewModel.SecondPhonenumber;
+
+            user.EmailConfirmed = true;
+
+            await _usermanager.UpdateAsync(user);
+
+            if (editAgentPRofileViewModel.CurrentPassword != null && editAgentPRofileViewModel.NewPassword != null)
+            {
+                string replacedCurrentPassword = editAgentPRofileViewModel.CurrentPassword;
+                string replacedNewPassword = editAgentPRofileViewModel.NewPassword;
+
+                IdentityResult result = await _usermanager.ChangePasswordAsync(user, replacedCurrentPassword, replacedNewPassword);
+                await _usermanager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    ViewBag.FirstName = user.Firstname;
+                    ViewBag.Email = user.Email;
+
+                    ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                    ViewBag.PhoneNumber = user.PhoneNumber;
+                    ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                    ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                    ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                    ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                    ViewBag.RegionId = user.RegionId;
+                    ViewBag.Regions = _context.Regions;
+                    ViewBag.Agencyabout = user.Agencyabout;
+
+                    ViewBag.AgencyImageUrl = user.AgencyImageUrl;
+
+                    ModelState.AddModelError("CurrentPassword", "Hazırki şifrə yanlışdır və ya yeni şifrə tələblərə uyğun deyil.");
+                    ModelState.AddModelError("NewPassword", "Hazırki şifrə yanlışdır və ya yeni şifrə tələblərə uyğun deyil.");
+                    return View(editAgentPRofileViewModel);
+                }
+            }
+
+            if (editAgentPRofileViewModel.AgencyPhoto != null)
+            {
+                if (editAgentPRofileViewModel.AgencyPhoto.ContentType.Contains("image/jpg")
+                || editAgentPRofileViewModel.AgencyPhoto.ContentType.Contains("image/jpeg"))
+                {
+                    if (editAgentPRofileViewModel.AgencyPhoto.Length > (2 * 1024 * 1024))
+                    {
+                        ViewBag.FirstName = user.Firstname;
+                        ViewBag.Email = user.Email;
+
+                        ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                        ViewBag.PhoneNumber = user.PhoneNumber;
+                        ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                        ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                        ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                        ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                        ViewBag.RegionId = user.RegionId;
+                        ViewBag.Regions = _context.Regions;
+                        ViewBag.Agencyabout = user.Agencyabout;
+
+                        ViewBag.AgencyImageUrl = user.AgencyImageUrl;
+                        ModelState.AddModelError("", "Şəklin həcmi 2MB'dan çox ola bilməz.");
+                        return View(editAgentPRofileViewModel);
+                    }
+
+                    string folderPath = Path.Combine(_env.WebRootPath, "Images", "Agent");
+                    string fileName = Guid.NewGuid().ToString() + "_" + editAgentPRofileViewModel.AgencyPhoto.FileName;
+                    string filePath = Path.Combine(folderPath, fileName);
+
+                    using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editAgentPRofileViewModel.AgencyPhoto.CopyToAsync(fileStream);
+                    }
+
+                    if (user.AgencyImageUrl != null)
+                    {
+                        string currentFilePath = Path.Combine(_env.WebRootPath, "Images", "Agent", user.AgencyImageUrl);
+                        if (System.IO.File.Exists(currentFilePath))
+                        {
+                            System.IO.File.Delete(currentFilePath);
+                        }
+                    }
+
+                    
+                    user.AgencyImageUrl = fileName;
+
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    ViewBag.FirstName = user.Firstname;
+                    ViewBag.Email = user.Email;
+
+                    ViewBag.NumberKeyCodeId = user.NumberKeyCodeId;
+                    ViewBag.PhoneNumber = user.PhoneNumber;
+                    ViewBag.NumberKeyCode = _context.NumberKeyCodes;
+
+                    ViewBag.NumberKeyCodeSecondId = user.NumberKeyCodeSecondId;
+                    ViewBag.SecondPhonenumber = user.SecondPhonenumber;
+                    ViewBag.NumberKeyCodeSecond = _context.NumberKeyCodeSecondS;
+
+                    ViewBag.RegionId = user.RegionId;
+                    ViewBag.Regions = _context.Regions;
+                    ViewBag.Agencyabout = user.Agencyabout;
+
+                    ViewBag.AgencyImageUrl = user.AgencyImageUrl;
+
+                    ModelState.AddModelError("", "Zəhmət olmasa, tələb olunan formatda şəkil yükləyin");
+                    return View(editAgentPRofileViewModel);
+                }
+            }
+
+            await _usermanager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("AnaSəhifə", "Evimiz"); ;
+        }
+
     }
 }

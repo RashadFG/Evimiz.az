@@ -43,9 +43,9 @@ namespace Evimiz
                         options.LogoutPath = "/Account/Logout";
                     });
 
-            services.AddIdentity<İstifadəçi, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<Db_Evimiz>()
-            .AddDefaultUI()
+            //.AddDefaultUI()
             .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(identityOptions =>

@@ -1777,7 +1777,7 @@ hr {
   border-radius: 50%;
 }
 #advertisement-details .container .user-ad .agent-img img {
-  height: 55px;
+  height: 79px;
 }
 #advertisement-details .container .agent-ad {
   border: 2px solid #145D8F;
@@ -1785,9 +1785,9 @@ hr {
 #advertisement-details .container .agent-ad .agent-img {
   border-radius: 50%;
 }
-#advertisement-details .container .agent-ad .agent-img img {
-  height: 55px;
-}
+    #advertisement-details .container .agent-ad .agent-img img {
+        height: 79px;
+    }
 #advertisement-details .container .comment-img img {
   width: 70px;
   height: 70px;
@@ -1867,6 +1867,10 @@ hr {
 .img-h {
   height: 83px;
 }
+
+
+
+
 
 #Delete-info h4 {
   border: 2px solid red;
@@ -2074,4 +2078,30 @@ hr {
 .change-div p {
     font-family: "Anglecia Pro Display";
     font-size: 16px;
+}
+/*-----------------------------------------*/
+.main-img-agent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.main-img-div {
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Handel Gothic";
+}
+
+.main-for-active {
+    display: block !important;
+}
+
+.bg-for-main {
+    background: #145D8F;
+}
+
+.bg-for-add {
+    background: #b0c255;
 }

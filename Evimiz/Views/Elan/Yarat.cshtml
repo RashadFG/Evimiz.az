@@ -134,7 +134,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -191,14 +190,16 @@
                         <select class="form-control City" asp-items="@(new SelectList(ViewBag.City, "Id", "Name"))" asp-for="CityId"> </select>
                         <div class="validation-error my-2 p-2">
                             <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                            <span asp-validation-for="CityId">Eror</span>
+                            <span asp-validation-for="CityId"></span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 about-city d-none">
                     <div class="form-group ">
                         <label for="">Rayon</label>
-                        <select class="form-control " asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))" asp-for="RegionId"></select>
+                        <select class="form-control regions-select" asp-items="@(new SelectList(ViewBag.Regions, "Id", "Name"))" asp-for="RegionId">
+                            <option value="0">Rayon seçin</option>  
+                        </select>
                         <div class="validation-error my-2 p-2">
                             <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
                             <span asp-validation-for="RegionId"></span>
@@ -208,7 +209,9 @@
                 <div class="col-md-6 col-12 about-city d-none">
                     <div class="form-group ">
                         <label for="">Qəsəbə</label>
-                        <select class="form-control " asp-items="@(new SelectList(ViewBag.Villages, "Id", "Name"))" asp-for="VillageId"></select>
+                        <select class="form-control village-select" asp-items="@(new SelectList(ViewBag.Villages, "Id", "Name"))" asp-for="VillageId">
+                            <option value="0">Ərazi seçin</option>
+                        </select>
                         <div class="validation-error my-2 p-2">
                             <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
                             <span asp-validation-for="VillageId"></span>
@@ -218,7 +221,9 @@
                 <div class="col-md-6 col-12 about-city d-none">
                     <div class="form-group ">
                         <label for="">Metro</label>
-                        <select class="form-control " asp-items="@(new SelectList(ViewBag.Metros, "Id", "Name"))" asp-for="MetroId">  </select>
+                        <select class="form-control metro-select " asp-items="@(new SelectList(ViewBag.Metros, "Id", "Name"))" asp-for="MetroId">
+                            <option value="0">Metro seçin</option>
+                        </select>
                         <div class="validation-error my-2 p-2">
                             <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
                             <span asp-validation-for="MetroId"></span>
@@ -235,349 +240,36 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="row">
+            <div class="row ">
                 <div class="col-12">
-                    <div class="Imgae-ad-download text-center btn btn-block my-2 orange">
-                        <i class="fas fa-upload mr-3"></i> Şəkil yüklə
-                        <input type="file" hidden class="img-ad-advertisement-down" multiple asp-for="AllPhotos">
+                    <div class="form-group">
+                        <label asp-for="IsPremium">Premium et</label>
+                        <input style="height:15px;width:15px" asp-for="IsPremium" class="form-control premium-check" >
                     </div>
                 </div>
-            </div>
-            <div class="row Imgae-ad-download-area justify-content-center">
-            </div>
-            <input type="submit" class="btn-block green-bg btn my-2 form-control" value="Elanı yarat">
-        </form>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="IsVip">Vip et</label>
+                        <input style="height:15px;width:15px" asp-for="IsVip" class="form-control vip-check" >
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="Imgae-ad-download text-center btn btn-block my-2 orange">
+                            <i class="fas fa-upload mr-3"></i> Şəkil yüklə
+                            <input type="file" hidden class="img-ad-advertisement-down" multiple asp-for="AllPhotos">
+                        </div>
+                    </div>
+                </div>
+                <div class="row Imgae-ad-download-area justify-content-center">
+                </div>
+                <input type="submit" class="btn-block green-bg btn my-2 form-control" value="Elanı yarat">
+</form>
     </div>
 </section>
+
 @section scripts{
     <partial name="_ValidationScriptsPartial" />
 }
-
-@*<div class="2 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="3 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="4 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="5 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="6 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="7 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="8 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="9 row d-none">
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label>Otaqların sayi</label>
-                <input class="form-control" placeholder="Otaqların sayi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12   ">
-            <div class="form-group">
-                <label for="">Sahəsi (m <sup>2</sup>) (sot) ilə</label>
-                <input class="form-control" placeholder="Sahəsi">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12  ">
-            <div class="form-group">
-                <label for="">Yerləşdiyi mərtəbə</label>
-                <input type="text" class="form-control" placeholder="Yerləşdiyi mərtəbə">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-12 ">
-            <div class="form-group">
-                <label for="">Mərtəbə sayı</label>
-                <input type="text" class="form-control" placeholder="Mərtəbə sayı">
-                <div class="validation-error my-2 p-2">
-                    <i class="fas fa-exclamation-triangle mr-2 d-none"></i>
-                    <span>Eror</span>
-                </div>
-            </div>
-        </div>
-    </div>*@

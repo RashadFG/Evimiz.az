@@ -1,0 +1,37 @@
+﻿@model News
+@{
+    ViewData["Title"] = "ViewNew";
+}
+
+<!-- NewDetails start -->
+<section id="NewDetails">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <h3 class=" my-3">Lorem ipsum dolor sit amet</h3>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="text-right  my-3">
+                    <span class="New-View all">Baxiş :@Model.ViewCount </span>|<br class="d-lg-none">
+                    <span class="ml-2 New-Author all">Muəllif : @Model.Author </span>|<br class="d-lg-none">
+                    <span class="ml-2 New-Date all">@String.Format("MM/dd/yyyy",Model.PublishDate)</span> |
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 col-12">
+                <div class="img">
+                    <img src="~/Images/News/@Model.ImageUrl" alt="" class="img-fluid w-100 ">
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="py-3">
+                    @Model.Info
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- NewDetails end -->

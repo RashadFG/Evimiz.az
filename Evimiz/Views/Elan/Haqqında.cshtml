@@ -1,4 +1,5 @@
 ﻿@model ViewModel
+
 @{
     ViewData["Title"] = "Haqqında";
 }
@@ -8,12 +9,17 @@
         <div class="row mt-2">
             <div class="col-lg-3 col-6 ">
                 <div class="topAdDetails mt-1">
-                    <i class="far fa-eye mr-2"></i> : 20
+                    @Model.Advertisement.Category.Name
                 </div>
             </div>
             <div class="col-lg-3 col-6">
+                <a class="d-block topAdDetails mt-1">
+                    @Model.Advertisement.Price AZN
+                </a>
+            </div>
+            <div class="col-lg-3 col-6">
                 <div class="topAdDetails mt-1">
-                    <i class="far fa-calendar-alt mr-2"></i>: 21.12.2019
+                    <i class="far fa-calendar-alt mr-2"></i>:@String.Format("{0:dd-MM-yyyy}", Model.Advertisement.PublishDate)
                 </div>
             </div>
             <div class="col-lg-3 col-6 ">
@@ -21,139 +27,84 @@
                     <i class="fas fa-flag-checkered mr-2"></i>Şikayət et
                 </a>
             </div>
-            <div class="col-lg-3 col-6">
-                <a href="#" class="d-block topAdDetails mt-1">
-                    <i class="far fa-heart mr-2"></i>Seçilmiş et
-                </a>
-            </div>
-        </div>
 
+        </div>
         <div class="row my-2 ">
-            <div class="col-lg-6 col-12 d-none d-lg-block ">
-                <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 area-big-photo">
+            <div class="col-md-6 col-12 @*d-none d-lg-block*@ ">
+                <img src="~/Images/Advertisement/@Model.Advertisement.Images.FirstOrDefault(x=>x.IsMainPhoto==true).Name" class="img-fluid w-100 area-big-photo">
             </div>
-            <div class="col-lg-6 col-12 d-none d-lg-block">
+            <div class="col-md-6 col-12 @*d-none d-lg-block" *@>
                 <div class="row small-images-slider">
-                    <!-- if(count<21  col-3nen yiq) -->
-                    <!-- if(count>21 col-2) -->
-                    <div class="col-3 mt-1 ">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Agent/jobs_image.jpg"  class=" img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
-                    <div class="col-3 mt-1">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" class="img-fluid w-100 img-h">
-                    </div>
+                    @foreach (var item in Model.Advertisement.Images)
+                    {
+                        @if (Model.Advertisement.Images.Count() < 21)
+                        {
+                            <div class="col-lg-3  col-6  col- mt-1 h-full">
+                                <img src="~/Images/Advertisement/@item.Name" class="img-fluid w-100 img-h ">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-2  col-md-3 col-6  mt-1 h-full">
+                                <img src="~/Images/Advertisement/@item.Name" class="img-fluid w-100 img-h ">
+                            </div>
+                        }
+                    }
+
                 </div>
             </div>
         </div>
 
-        <!-- Phone carousel -->
-        <div class="row my-2  d-lg-none">
-            <div id="myCarousel" class="carousel slide w-100 " data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" alt="Los Angeles"
-                             style="width:100%; object-fit: cover ;height: 300px">
-                    </div>
+        @*<!-- Phone carousel -->
+            <div class="row my-2  d-lg-none">
+                <div id="myCarousel" class="carousel slide w-100 " data-ride="carousel">
+                    <div class="carousel-inner">
 
-                    <div class="item">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" alt="Los Angeles"
-                             style="width:100%;object-fit: cover ;height: 300px">
+                        @foreach (var item in Model.Advertisement.Images.Where(x => x.IsMainPhoto == false))
+                        {
+                            @if (item.IsMainPhoto == true)
+                            {
+                                <div class="item active">
+                                    <img src="~/Images/Advertisement/@Model.Advertisement.Images.FirstOrDefault(x=>x.IsMainPhoto==true).Name" alt="Los Angeles"
+                                         style="width:100%; object-fit: cover ;height: 300px">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item">
+                                    <img src="~/Images/Advertisement/@item.Name" alt="Los Angeles"
+                                         style="width:100%; object-fit: cover ;height: 300px">
+                                </div>
+                            }
+                        }
                     </div>
-
-                    <div class="item">
-                        <img src="~/Images/Advertisement/billa_2rug7463563535.jpg" alt="Los Angeles"
-                             style="width:100%; object-fit: cover ;height: 300px">
-                    </div>
-
-                    <div class="item">
-                        <img src="~/Images/News/download.jfif" alt="Los Angeles"
-                             style="width:100%; object-fit: cover ;height: 300px">
-                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-
-        </div>
+            </div>*@
 
         <div class="row justify-content-center">
-            <h2>Satılır 4 otaqlı ev | villa 110 m<sup>2</sup>| Sulutəpə</h2>
+            @if (Model.Advertisement.CategoryId != 7 || Model.Advertisement.CategoryId != 8)
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name @Model.Advertisement.Room.Count otaqlı | @Model.Advertisement.Category.Name @Model.Advertisement.Area m<sup>2</sup>| @Model.Advertisement.City.Name</h2>
+            }
+            else if (Model.Advertisement.CategoryId == 7)
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name  | @Model.Advertisement.Category.Name @Model.Advertisement.Area m<sup>2</sup>| @Model.Advertisement.City.Name</h2>
+            }
+            else
+            {
+                <h2>@Model.Advertisement.PropertyCategory.Name  | @Model.Advertisement.Category.Name @Model.Advertisement.Area sot| @Model.Advertisement.City.Name</h2>
+            }
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-md-4 col-6">
-                        <a href="#" class="Ad-Price text-center another-bg mt-1 d-block">
-                            <i class="fas fa-crown text-warning"></i> Premium et
-                        </a>
-                    </div>
-                    <div class="col-md-4 col-6">
-                        <a href="#" class="Ad-Price text-center another-bg mt-1 d-block">
-                            <i class="fas fa-gem text-danger"></i> VİP et
-
-                        </a>
-                    </div>
-                    <div class="col-md-4  col-12">
-                        <div class="Ad-Price text-center price-bg my-1">
-                            100000000AZN
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
 
         <div class="row">
             <div class="col-md-6 col-12">
@@ -162,30 +113,7 @@
                     <div class="row">
                         <div class="col-12">
                             <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                with desktop publishing software like Aldus PageMaker including versions of Lorem
-                                Ipsum.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                with desktop publishing software like Aldus PageMaker including versions of Lorem
-                                Ipsum.
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                It has survived not only five centuries, but also the leap into electronic
-                                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                with desktop publishing software like Aldus PageMaker including versions of Lorem
-                                Ipsum.
+                                @Model.Advertisement.About
                             </p>
                         </div>
                         <div class="col-6">
@@ -195,39 +123,112 @@
                         </div>
                         <div class="col-6">
                             <div class="info p-3 bold">
-                                Villa
+                                @Model.Advertisement.Category.Name
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="info p-3">
-                                Sahə
+                        @if (Model.Advertisement.CategoryId == 1 || Model.Advertisement.CategoryId == 2 || Model.Advertisement.CategoryId == 6)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="info p-3 bold">
-                                4400 m <sup>2</sup>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="info p-3">
-                                Otaqların sayı
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Otaqların sayı
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="info p-3 bold">
-                                2
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Room.Count
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="info p-3">
-                                Mərtəbə sayı
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Mərtəbə sayı
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="info p-3 bold">
-                                12
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Floor.Count
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Binanın Mərtəbə sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Rank.Count
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Advertisement.CategoryId == 3 || Model.Advertisement.CategoryId == 5 || Model.Advertisement.CategoryId == 6 || Model.Advertisement.CategoryId == 9)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Otaqların sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Room.Count
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Mərtəbə sayı
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Floor.Count
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Advertisement.CategoryId == 3)
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area  m <sup>2</sup>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6">
+                                <div class="info p-3">
+                                    Sahə
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="info p-3 bold">
+                                    @Model.Advertisement.Area sot
+                                </div>
+                            </div>
+                        }
+
                         <div class="col-6">
                             <div class="info p-3">
                                 Təmiri
@@ -235,7 +236,7 @@
                         </div>
                         <div class="col-6">
                             <div class="info p-3 bold">
-                                Əla təmirli
+                                @Model.Advertisement.PropertyRepair.Name
                             </div>
                         </div>
                         <div class="col-6">
@@ -245,7 +246,7 @@
                         </div>
                         <div class="col-6">
                             <div class="info p-3 bold">
-                                Çıxarış (Kupça)
+                                @Model.Advertisement.PropertyDocument.Name
                             </div>
                         </div>
 
@@ -253,82 +254,75 @@
                 </div>
             </div>
             <div class="col-md-6 col-12">
-                <a href="MyProfile.html" class="agent-ad p-2 d-block mt-2">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="agent-img">
-                                <img src="~/Images/Agent/jobs_image.jpg" class="img-fluid w-100" />
+                @if (Model.Advertisement.ApplicationUser.İsAgent == true)
+                {
+                    <a  asp-controller="Evimiz"  asp-action="OfflineProfile" asp-route-id="@Model.Advertisement.ApplicationUserId" class="agent-ad p-2 d-block mt-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="agent-img">
+                                    @if (Model.Advertisement.ApplicationUser.UserImageUrl == null)
+                                    {
+                                        <img src="~/Images/Agent/default-logo.png" class="img-fluid w-100" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/Agent/@Model.Advertisement.ApplicationUser.UserImageUrl" class="img-fluid w-100" />
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p>@Model.Advertisement.ApplicationUser.Firstname emklak , <span class="ml-2">@Model.Advertisement.ApplicationUser.Region.Name</span></p>
+                                <p>
+                                    @Model.Advertisement.ApplicationUser.NumberKeyCode.Kcode@Model.Advertisement.ApplicationUser.PhoneNumber
+                                    @if (Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode != null)
+                                    {
+                                        <span class="ml-2">@Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode@Model.Advertisement.ApplicationUser.SecondPhonenumber</span>
+                                    }
+                                </p>
                             </div>
                         </div>
-                        <div class="col-9">
-                            <p>Araz emklak , <span class="ml-2">Sabuncu</span></p>
-                            <p>+994513739277 <span class="ml-2">+994513739277</span></p>
-                        </div>
-                    </div>
-                </a>
-                <a href="MyProfile.html" class="user-ad p-2 d-block mt-2">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="agent-img">
-                                <img src="~/Images/Agent/jobs_image.jpg" class="img-fluid w-100" />
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Evimiz"  asp-action="OfflineProfile" asp-route-id="@Model.Advertisement.ApplicationUserId" class="user-ad p-2 d-block mt-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="agent-img">
+                                    @if (Model.Advertisement.ApplicationUser.UserImageUrl == null)
+                                    {
+                                        <img src="~/Images/profile/empty-profile.png" class="img-fluid w-100" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/profile/@Model.Advertisement.ApplicationUser.UserImageUrl" class="img-fluid w-100" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p>@Model.Advertisement.ApplicationUser.Firstname @Model.Advertisement.ApplicationUser.Lastname</p>
+                                <p>
+                                    @Model.Advertisement.ApplicationUser.NumberKeyCode.Kcode@Model.Advertisement.ApplicationUser.PhoneNumber
+                                    @if (Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode != null)
+                                    {
+                                        <span class="ml-2">@Model.Advertisement.ApplicationUser.NumberKeyCodeSecond.Kcode@Model.Advertisement.ApplicationUser.SecondPhonenumber</span>
+                                    }
+                                </p>
                             </div>
                         </div>
-                        <div class="col-9">
-                            <p>Samir , <span class="ml-2">Bineqedi</span></p>
-                            <p>+994513739277 <span class="ml-2">+994513739277</span></p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                }
                 <div>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12157.71469426235!2d49.8539455!3d40.3771909!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc20aa51a5f0b5e01!2sCode%20Academy!5e0!3m2!1sen!2s!4v1566992963166!5m2!1sen!2s"
                             width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                 </div>
                 <div class="ovarlay-adress">
                     <p class="text-white">
-                        Baki weheri,ehmed recebli kuc bina1 menzil 36
+                        @Model.Advertisement.Address
                     </p>
                 </div>
             </div>
-        </div>
-
-        <div class="all-comments">
-            <!-- comment area -->
-            <div class="row Comment-area mt-2">
-                <span class="comment-img mx-2">
-                    <img src="~/Images/Agent/jobs_image.jpg" alt="" class="img-fluid ">
-                </span>
-                <span class="comment-area">
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasas AsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                </span>
-            </div>
-
-            <div class="row Comment-area mt-2">
-                <span class="comment-img mx-2">
-                    <img src="~/Images/Agent/jobs_image.jpg" alt="" class="img-fluid ">
-                </span>
-                <span class="comment-area">
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                    AsasasAsasasAsasasAsasasAsasasAsasasAsasas AsasasAsasasAsasasAsasasAsasasAsasasAsasas
-                </span>
-            </div>
-
-            <!-- <div class="load-more  mt-3 col-6">
-                <a href="#" class="btn Btn-yellow  btn-block"> <i class="fas fa-plus"></i> Hamısına bax</a>
-            </div> -->
-        </div>
-
-        <div class="row mt-2">
-            <span class="comment-img mx-2">
-                <img src="~/Images/profile/empty-profile.png" alt="" class="img-fluid ">
-            </span>
-            <span class="area">
-                <textarea class="Area-text" placeholder="Rəy bildir..."> </textarea>
-            </span>
         </div>
 
     </div>
@@ -340,343 +334,188 @@
         <div class="row head">
             <div class="col-md-8 col-12 ">
                 Bənzər elanlar
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    Satilır
-                </span>
             </div>
             <div class="col-md-4 col-12  d-md-flex justify-content-end">
-                <a asp-controller="Evimiz" asp-action="Elanlar">Hamısını göstər <i class="fas fa-arrow-right ml-1 color-blue"></i></a>
             </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Place">
+            @foreach (var item in Model.Advertisements.OrderByDescending(x => x.PublishDate).Take(8))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                    <i class="fas fa-heart heart fa-2x d-none"></i>
+                    <i class="far fa-heart heart fa-2x"></i>
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    <img src="~/images/Advertisement/@item.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                    @if (item.PropertyCategory.Id == 1)
+                                    {
+                                        <div class="Rent">Satış</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="Sell">Kirayə</div>
+                                    }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="about-advertisement">
+                                    <div class="location">
+                                        <div class="col-12 p-0">
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
+                                        </div>
+                                    </div>
+                                    @if (item.CategoryId == 1)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 2)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 4)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 3)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 5)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 6)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 7)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area m<sup>2</sup> </span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 8)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area sot </span> |
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    <div class="date">
+                                        <span>@item.City.Name,</span>
+                                        <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                    </div>
+                                    @if (item.IsVip == true)
+                                    {
+                                        <i class="fas fa-gem gem"></i>
+                                    }
+                                    else if (item.IsPremium == true)
+                                    {
+                                        <i class="fas fa-crown premium"></i>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
         <div class="row Advertisement-place justify-content-center">
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a asp-controller="Elan" asp-action="Haqqında">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="load-more  mt-3 col-md-4 col-6">
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
+            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
+                @if (Model.Advertisements.Where(x => x.CategoryId == 8 && x.IsPremium == false && x.IsVip == false).Count() > 8)
+                {
+                    <a href="#" class="btn Btn-yellow  btn-block">
+                        <i class="fas fa-plus"></i> Daha
+                        çox
+                    </a>
+                }
             </div>
         </div>
-
     </div>
 </section>
 <!-- Alike Advertisement end -->
 
+@*<div class="all-comments">
+        <!-- comment area -->
+        <div class="row Comment-area mt-2">
+            <span class="comment-img mx-2">
+                <img src="~/Images/Agent/jobs_image.jpg" alt="" class="img-fluid ">
+            </span>
+            <span class="comment-area">
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasas AsasasAsasasAsasasAsasasAsasasAsasasAsasas
+            </span>
+        </div>
 
+        <div class="row Comment-area mt-2">
+            <span class="comment-img mx-2">
+                <img src="~/Images/Agent/jobs_image.jpg" alt="" class="img-fluid ">
+            </span>
+            <span class="comment-area">
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasas
+                AsasasAsasasAsasasAsasasAsasasAsasasAsasas AsasasAsasasAsasasAsasasAsasasAsasasAsasas
+            </span>
+        </div>
+
+        <!-- <div class="load-more  mt-3 col-6">
+            <a href="#" class="btn Btn-yellow  btn-block"> <i class="fas fa-plus"></i> Hamısına bax</a>
+        </div> -->
+    </div>
+
+    <div class="row mt-2">
+        <span class="comment-img mx-2">
+            <img src="~/Images/profile/empty-profile.png" alt="" class="img-fluid ">
+        </span>
+        <span class="area">
+            <textarea class="Area-text" placeholder="Rəy bildir..."> </textarea>
+        </span>
+    </div>*@

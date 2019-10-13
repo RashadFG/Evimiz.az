@@ -30,8 +30,8 @@ namespace Evimiz.Models
         public int CityId { get; set; }
         public virtual City City { get; set; }
 
-        public string İstifadəçiId { get; set; }
-        public virtual İstifadəçi User { get; set; }
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         //NullAble fields---
         public int? NumberKeyCodeSecondId { get; set; }

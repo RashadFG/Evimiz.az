@@ -1,7 +1,9 @@
-﻿
+﻿@model ViewModel
+
 @{
     ViewData["Title"] = "Profilim";
 }
+
 
 <!-- Agency profile start -->
 <section id="My-Profile">
@@ -10,46 +12,57 @@
             <div class="col-lg-2 col-md-4 col-12 ">
                 <div class="my-image upload-image-commment">
                     <div class="a-area"></div>
-                    <img src="~/Images/Agent/default-logo.png" alt="" class="img-fluid w-100 img-default ">
-                    <a href="#"><i class="fas fa-camera upload-image-for-profile"></i></a>
-                    <input type="file" hidden class="d-none input-personal">
-                    <a href="#"><i class="fas fa-check d-none upload-image-for-profile-confirm"></i></a>
+                    @if (Model.User.AgencyImageUrl == null)
+                    {
+                        <img src="~/Images/Agent/default-logo.png" alt="" class="img-fluid w-100 img-default ">
+                    }
+                    else
+                    {
+                        <img src="~/Images/Agent/@Model.User.AgencyImageUrl" alt="" class="img-fluid w-100 img-default ">
+                    }
+                    @if (User.Identity.Name==Model.User.UserName)
+                    {
+                        <a href="#" title="Upload-photo"><i class="fas fa-camera upload-image-for-profile"></i></a>
+                        <form enctype="multipart/form-data" method="post">
+                            <input hidden class="d-none input-personal" asp-for="@Model.User.AgencyImageUrl" class="single-phot-upload">
+                            <a type="submit" class="upload-photo-small-box"><i class="fas fa-check d-none upload-image-for-profile-confirm"></i></a>
+                        </form>
+                    }
                 </div>
-
             </div>
             <div class="col-lg-10 col-md-8 col-12">
-                <h3>
-                    Araz Emlak <a asp-controller="Əmlakçılar" asp-action="DuzəlişEt"><i class="far fa-edit fa-xs mr-2"></i></a>
-                    <a href="#Advertisement-error"><i class="far fa-envelope fa-xs "></i><sup>1</sup></a>
-
+                <h3 class="my-2">
+                    @Model.User.Firstname əmlak
+                    @if (User.Identity.Name == Model.User.UserName)
+                    {
+                        <a asp-controller="Hesab" asp-action="ƏmlakçıDüzəlişEt" title="Edit"><i class="fas fa-user-edit fa-xs mr-2"></i></a>
+                        <a href="#Advertisement-error" title="Message"><i class="far fa-envelope fa-xs "></i><sup>1</sup></a>
+                    }
                     <hr>
                 </h3>
                 <div class="row">
                     <div class="col-xl-3 col-6 ">
-                        <span class="under-property">Elanların sayı(23)</span>
+                        <span class="under-property">Elanların sayı(@Model.Advertisements.Count())</span>
                     </div>
                     <div class="col-xl-3 col-6 ">
-                        <div class="under-property">051-373-92-77</div>
-                        <div class="under-property">051-373-92-77</div>
+                        <div class="under-property">@Model.User.NumberKeyCode.Kcode @Model.User.PhoneNumber</div>
+                        @if (Model.User.PhoneNumber != null)
+                        {
+                            <div class="under-property">@Model.User.NumberKeyCodeSecond.Kcode @Model.User.SecondPhonenumber</div>
+                        }
                     </div>
                     <div class="col-xl-3 col-6 ">
-                        <span class="under-property">Baki,Abşeron</span>
+                        <span class="under-property">Əmlakçı</span>
                     </div>
                     <div class=" col-xl-3 col-6 ">
-                        <div class="under-property">21.12.2019</div>
+                        <div class="under-property">@String.Format("{0:MM/dd/yyyy}", Model.User.RegisterDate)</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <p class="p-3">
-                It is a long established fact that a reader will be distracted by the readable content of a page
-                when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                distribution of letters, as opposed to using 'Content here, content here', making it look like
-                readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose
-                (injected humour and the like).
+                @Model.User.Agencyabout
             </p>
         </div>
     </div>
@@ -62,28 +75,28 @@
             <div class="col-lg-3 col-6 mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class="  categroy-btn d-block   text-center">
-                        <i class="far fa-building"></i> Yeni tikili (12)
+                        <i class="far fa-building"></i> Yeni tikili (@Model.Advertisements.Where(x => x.CategoryId == 1).Count())
                     </a>
                 </div>
             </div>
             <div class="col-lg-3 col-6   mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class=" categroy-btn d-block   text-center">
-                        <i class="fas fa-building"></i> Köhnə tikili (12)
+                        <i class="fas fa-building"></i> Köhnə tikili (@Model.Advertisements.Where(x => x.CategoryId == 2).Count())
                     </a>
                 </div>
             </div>
             <div class="col-lg-3 col-6   mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class="  categroy-btn d-block  text-center">
-                        <i class="fas fa-home"></i> Həyət evi (12)
+                        <i class="fas fa-home"></i> Həyət evi (@Model.Advertisements.Where(x => x.CategoryId == 4).Count())
                     </a>
                 </div>
             </div>
             <div class="col-lg-3 col-6   mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class=" categroy-btn d-block    text-center">
-                        <i class="fas fa-hotel"></i> Villa (12)
+                        <i class="fas fa-hotel"></i> Villa (@Model.Advertisements.Where(x => x.CategoryId == 3).Count())
                     </a>
                 </div>
 
@@ -91,7 +104,7 @@
             <div class="col-lg-3 col-6   mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class="  categroy-btn d-block text-center ">
-                        <i class="fas fa-mail-bulk"></i> Ofis (12)
+                        <i class="fas fa-mail-bulk"></i> Ofis (@Model.Advertisements.Where(x => x.CategoryId == 6).Count())
                     </a>
                 </div>
 
@@ -99,7 +112,7 @@
             <div class="col-lg-3 col-6  mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class=" categroy-btn d-block    text-center">
-                        <i class="far fa-square"></i> Torpaq (12)
+                        <i class="far fa-square"></i> Torpaq (@Model.Advertisements.Where(x => x.CategoryId == 8).Count())
                     </a>
                 </div>
 
@@ -107,424 +120,167 @@
             <div class="col-lg-3 col-6   mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class="  categroy-btn d-block  text-center">
-                        <i class="fas fa-store"></i> Object (12)
+                        <i class="fas fa-store"></i> Object (@Model.Advertisements.Where(x => x.CategoryId == 9).Count())
                     </a>
                 </div>
             </div>
             <div class="col-lg-3 col-6  mb-2">
                 <div class="single-item font-size-a">
                     <a href="#" class=" categroy-btn d-block  text-center">
-                        <i class="fas fa-warehouse"></i> Qaraj (12)
+                        <i class="fas fa-warehouse"></i> Qaraj (@Model.Advertisements.Where(x => x.CategoryId == 7).Count())
                     </a>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 <!-- category end -->
-<!-- Advertisement-error start -->
-<section id="Advertisement-error">
-    <div class="container">
-        <div class="row head bg-danger">
-            <div class="col-md-8 col-12 ">
-                <i class="fas fa-exclamation-triangle mr-1"></i> Diqqət!
-            </div>
-        </div>
-        <div class="row Advertisement-place justify-content-center">
-            <a href="AdvertisementDetails.html" class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <div class="row">
-                    <div class="col-12 ">
-                        <div class="img">
-                            <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-                            <i class="fas fa-heart heart fa-2x d-none"></i>
-                            <i class="far fa-heart heart fa-2x"></i>
-                            <div class="Rent">Kirayə</div>
-                            <div class="Sell">Satış</div>
-                            <div class="Price">10000000Azn</div>
-                            <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                            <i class="fas fa-file-signature document fa-1x"></i>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="about-advertisement">
-                            <div class="location">
-                                <div class="col-12 p-0">
-                                    <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <span>3 otaqlı </span> |
-                                <span> 140 m<sup>2</sup> </span> |
-                                <span> 14/18 m</span>
-                            </div>
-                            <div class="date">
-                                <span>Bakı,</span>
-                                <span>bu gun 12:30</span>
-                            </div>
-                            <i class="fas fa-gem gem"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <div class="col-lg-9 col-md-6 col-sm-9  col-10 mt-3">
-                <div class="row">
-                    <div class="col-12 ">
-                        <p>
-                            Xahiw edirik yerləşdirdiyiniz elanda şəkilləri daha aydin yükləyəsiniz
-                            Xahiw edirik yerləşdirdiyiniz elanda şəkilləri daha aydin yükləyəsiniz
-                        </p>
-                        <a href="EditAdvertisement.html"
-                           class="btn btn-clik btn-success   crud-property my-2">Düzəliş et</a>
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>
-<!-- Advertisement-error end -->
 <!-- Waiting Advertisement start -->
 <section id="advertisement">
     <div class="container">
         <div class="row head ">
             <div class="col-md-8 col-12 ">
-                <i class="far fa-pause-circle mr-2 color-blue"></i> Gözləyən elanlarım
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    Satilır
-                </span>
+                <i class="far fa-pause-circle mr-2 color-blue"></i>  Gözləyən elanlar
             </div>
-
+        </div>
+        <div class="row Advertisement-place justify-content-center Premium">
+            @foreach (var item in Model.Advertisements.OrderByDescending(x => x.PublishDate))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                    <i class="fas fa-heart heart fa-2x d-none"></i>
+                    <i class="far fa-heart heart fa-2x"></i>
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    <img src="~/images/Advertisement/@item.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100" style="opacity:0.3">
+                                    @if (item.PropertyCategory.Id == 1)
+                                    {
+                                        <div class="Rent">Satış</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="Sell">Kirayə</div>
+                                    }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="about-advertisement">
+                                    <div class="location">
+                                        <div class="col-12 p-0">
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
+                                        </div>
+                                    </div>
+                                    @if (item.CategoryId == 1)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 2)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 4)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 3)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 5)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 6)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 7)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area m<sup>2</sup> </span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 8)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area sot </span> |
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    <div class="date">
+                                        <span>@item.City.Name,</span>
+                                        <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                    </div>
+                                    @if (item.IsVip == true)
+                                    {
+                                        <i class="fas fa-gem gem"></i>
+                                    }
+                                    else if (item.IsPremium == true)
+                                    {
+                                        <i class="fas fa-crown premium"></i>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
         <div class="row Advertisement-place justify-content-center">
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100" style="opacity:0.3">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="load-more  mt-3 col-md-4 col-6">
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
+            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
+                @if (Model.Advertisements.Count() > 16)
+                {
+                    <a href="#" class="btn Btn-yellow  btn-block">
+                        <i class="fas fa-plus"></i> Daha
+                        çox
+                    </a>
+                }
             </div>
         </div>
-
     </div>
 </section>
 <!-- Waiting Advertisement end -->
@@ -533,385 +289,157 @@
     <div class="container">
         <div class="row head">
             <div class="col-md-8 col-12 ">
-                <i class="fas fa-id-card-alt mr-2 color-blue"></i> Mənim elanlarım
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    Satilır
-                </span>
+                <i class="fas fa-id-card-alt mr-2 color-blue"></i>  Şəxsi elanlar
             </div>
-
         </div>
         <div class="row Advertisement-place justify-content-center">
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" ">
-                <a href=" AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <!-- if(------){ -->
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <!-- } -->
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
+            @foreach (var item in Model.Advertisements.OrderByDescending(x => x.PublishDate))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
+                    <a href="AdvertisementDetails.html">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    @if (User.Identity.Name == Model.User.UserName)
+                                    {
+                                        <a asp-controller="Elan" asp-action="Sil" asp-route-id="@item.Id">
+                                            <i class="far fa-trash-alt trash fa-2x"></i>
+                                        </a>
+                                        <a asp-controller="Elan" asp-action="DüzəlişEt" asp-route-id="@item.Id">
+                                            <i class="fas fa-edit  edit fa-2x"></i>
+                                        </a>
+                                    }
+                                    <img src="~/images/Advertisement/@item.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                    <i class="fas fa-heart heart fa-2x d-none"></i>
+                                    <i class="far fa-heart heart fa-2x"></i>
+                                    @if (item.PropertyCategory.Id == 1)
+                                    {
+                                        <div class="Rent">Satış</div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="Sell">Kirayə</div>
+                                    }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
+                            <div class="col-12">
+                                <div class="about-advertisement">
+                                    <div class="location">
+                                        <div class="col-12 p-0">
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
+                                    @if (item.CategoryId == 1)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 2)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 4)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 3)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 5)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 6)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 7)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area m<sup>2</sup> </span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 8)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area sot </span> |
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    <div class="date">
+                                        <span>@item.City.Name,</span>
+                                        <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
                                     </div>
+                                    @if (item.IsVip == true)
+                                    {
+                                        <i class="fas fa-gem gem"></i>
+                                    }
+                                    else if (item.IsPremium == true)
+                                    {
+                                        <i class="fas fa-crown premium"></i>
+                                    }
                                 </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img ">
-                                <a href="DeleteAdvertisement.html">
-                                    <i class="far fa-trash-alt trash fa-2x"></i>
-                                </a>
-                                <a href="EditAdvertisement.html">
-                                    <i class="fas fa-edit  edit fa-2x"></i>
-                                </a>
-                                <img src="~/images/Massive/Cammur4.png" class="img-fluid w-100">
-                                <i class="fas fa-heart heart fa-2x d-none"></i>
-                                <i class="far fa-heart heart fa-2x"></i>
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">1000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="load-more  mt-3 col-md-4 col-6">
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="row Advertisement-place justify-content-center">
+            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
+                @if (Model.Advertisements.Count() > 16)
+                {
+                    <a href="#" class="btn Btn-yellow  btn-block">
+                        <i class="fas fa-plus"></i> Daha
+                        çox
+                    </a>
+                }
             </div>
         </div>
-
     </div>
 </section>
 <!-- My Advertisement end -->
@@ -920,337 +448,147 @@
     <div class="container">
         <div class="row head">
             <div class="col-md-8 col-12 ">
-                <i class="fas fa-heart heart mr-2 color-blue"></i> Seçilmiş elanlarım
-                <span class="ml-3 search-category">
-                    Kirayə
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    Satilır
-                </span>
+                <i class="far fa-heart mr-2  "></i>  Seçilmiş elanlar
             </div>
-
+            <div class="col-md-4 col-12  d-md-flex justify-content-end">
+            </div>
+        </div>
+        <div class="row Advertisement-place justify-content-center Premium">
+            @foreach (var item in Model.Advertisements.OrderByDescending(x => x.PublishDate).Take(8))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3" data-aos="fade-up">
+                    <i class="fas fa-heart heart fa-2x d-none"></i>
+                    <i class="far fa-heart heart fa-2x"></i>
+                    <a asp-controller="Elan" asp-action="Haqqında" asp-route-id="@item.Id">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="img">
+                                    <img src="~/images/Advertisement/@item.Images.FirstOrDefault(x=>x.AdvertisementId==item.Id && x.IsMainPhoto==true).Name" class="img-fluid w-100">
+                                    @if (item.PropertyCategory.Id == 1)
+                                    {
+                                        <div class="Rent">Satış</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="Sell">Kirayə</div>
+                                    }
+                                    <div class="Price">@item.Price Azn</div>
+                                    @if (item.PropertyDocument.Id == 6)
+                                    {
+                                        <i class="fas fa-file-signature document fa-1x"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="about-advertisement">
+                                    <div class="location">
+                                        <div class="col-12 p-0">
+                                            @if (item.CityId == 10)
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.Region.Name
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-map-marker-alt"></i> @item.City.Name
+                                            }
+                                        </div>
+                                    </div>
+                                    @if (item.CategoryId == 1)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 2)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 4)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 3)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 5)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 6)
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 7)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area m<sup>2</sup> </span>
+                                        </div>
+                                    }
+                                    else if (item.CategoryId == 8)
+                                    {
+                                        <div class="detail">
+                                            <span> @item.Area sot </span> |
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="detail">
+                                            <span>@item.Room.Count otaqlı </span> |
+                                            <span> @item.Area m<sup>2</sup> </span> |
+                                            <span> @item.Floor.Count/@item.Rank.Count m</span>
+                                        </div>
+                                    }
+                                    <div class="date">
+                                        <span>@item.City.Name,</span>
+                                        <span>@String.Format("{0:MM/dd/yyyy}", item.PublishDate)</span>
+                                    </div>
+                                    @if (item.IsVip == true)
+                                    {
+                                        <i class="fas fa-gem gem"></i>
+                                    }
+                                    else if (item.IsPremium == true)
+                                    {
+                                        <i class="fas fa-crown premium"></i>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
         <div class="row Advertisement-place justify-content-center">
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-9  col-10 mt-3">
-                <i class="fas fa-heart heart fa-2x d-none"></i>
-                <i class="far fa-heart heart fa-2x"></i>
-                <a href="AdvertisementDetails.html">
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="img">
-                                <img src="~/images/Massive/project189_353.jpg" class="img-fluid w-100">
-
-                                <div class="Rent">Kirayə</div>
-                                <div class="Sell">Satış</div>
-                                <div class="Price">10000000Azn</div>
-                                <i class="fas fa-camera-retro camera fa-2x"> 3</i>
-                                <i class="fas fa-file-signature document fa-1x"></i>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="about-advertisement">
-                                <div class="location">
-                                    <div class="col-12 p-0">
-                                        <i class="fas fa-map-marker-alt"></i> Nəsimi r.
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <span>3 otaqlı </span> |
-                                    <span> 140 m<sup>2</sup> </span> |
-                                    <span> 14/18 m</span>
-                                </div>
-                                <div class="date">
-                                    <span>Bakı,</span>
-                                    <span>bu gun 12:30</span>
-                                </div>
-                                <i class="fas fa-gem gem"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
-            <div class="load-more  mt-3 col-md-4 col-6">
-                <a href="#" class="btn Btn-yellow  btn-block">
-                    <i class="fas fa-plus"></i> Daha
-                    çox
-                </a>
+            <div class="load-more  mt-3 col-md-4 col-6 " data-aos="fade-left">
+                @if (Model.Advertisements.Where(x => x.IsPremium == true).Count() > 8)
+                {
+                    <a href="#" class="btn Btn-yellow  btn-block">
+                        <i class="fas fa-plus"></i> Daha
+                        çox
+                    </a>
+                }
             </div>
         </div>
     </div>
